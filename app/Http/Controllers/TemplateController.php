@@ -13,7 +13,7 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        //
+        return view('sms.template.index');
     }
 
     /**
@@ -21,9 +21,9 @@ class TemplateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id = '')
     {
-        //
+        return view('sms.template.form.index');
     }
 
     /**
@@ -48,16 +48,6 @@ class TemplateController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

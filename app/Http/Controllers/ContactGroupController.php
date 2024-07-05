@@ -13,7 +13,7 @@ class ContactGroupController extends Controller
      */
     public function index()
     {
-        //
+        return view('contact_group.index');
     }
 
     /**
@@ -23,7 +23,7 @@ class ContactGroupController extends Controller
      */
     public function create()
     {
-        //
+        return view('contact_group.form');
     }
 
     /**

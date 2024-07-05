@@ -1,0 +1,18 @@
+ <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-md-5 align-self-center">
+                <h3 class="page-title">Attributes</h3>
+                    <div class="d-flex align-items-center">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:void(0)">Attributes</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Lists</li>
+                            </ol>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-md-7 justify-content-end align-self-center d-md-flex">
+                <a class="btn btn-light " href=""><i class="fa fa-plus" aria-hidden="true"></i> New</a>
+            </div>
+        </div>
+    </div>

@@ -6,25 +6,31 @@
                     <div class="chat-menus">
                         <ul>
                             <li>
-                                <a href="index.html" class="chat-unread active" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Inbox">
+                                <a href="{{route('message.index')}}" class="chat-unread active" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Inbox">
                                     <i class="bx bxs-inbox"></i>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="index.html" class="chat-unread active" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Compose">
+                                <a href="{{route('message.compose')}}" class="chat-unread " data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Compose">
                                 <i class='bx bxs-comment-edit'></i>
                                 </a>
                             </li>
                             
                             <li>
-                                <a href="index.html" class="chat-unread active" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Contact List">
+                                <a  href="{{route('contacts.index')}}" class="chat-unread " data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Contact List">
                                     <i class='bx bxs-contact'></i>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="index.html" class="chat-unread active" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Template">
+                                <a href="{{route('contact_group.index')}}" class="chat-unread " data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Contact Groups">
+                                 <i class='bx bxs-group'></i>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{route('sms_template.index')}}" class="chat-unread " data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Template">
                                  <i class='bx bxs-file-doc'></i>
                                 </a>
                             </li>
@@ -32,7 +38,14 @@
                     </div>
                     <div class="bottom-menus">
                         <ul>
-                            
+                            <li class="d-none">
+                                <a href="#" id="dark-mode-toggle" class="dark-mode-toggle">
+                                    <i class="bx bx-moon"></i>
+                                </a>
+                                <a href="#" id="light-mode-toggle" class="dark-mode-toggle active">
+                                    <i class="bx bx-sun"></i>
+                                </a>
+                            </li>
                             <li>
                                 <div class="avatar avatar-online">
                                     <a href="#" class="chat-profile-icon" data-bs-toggle="dropdown">

@@ -34,6 +34,7 @@
 
     <!-- App CSS -->
     <link rel="stylesheet" href="{{url('assets/css/app.css')}}">
+    <link rel="stylesheet" href="{{url('common/custom.css')}}">
     @yield('css')
 </head>
 
@@ -53,6 +54,7 @@
         <!-- /Content -->
 
     </div>
+    @include('common.modal')
     <!-- /Main Wrapper -->
 	
 	<!-- jQuery -->
@@ -75,6 +77,10 @@
 
 	<!-- Custom JS -->
     <script src="{{url('assets/js/script.js')}}"></script> 
+    <script src="{{ url('common/js/swal.js') }}"></script>
+	<script src="{{ url('common/js/bootstrap-table.js') }}"></script>
+    <script src="{{ url('common/js/common.js') }}"></script>
+    <script src="{{ url('common/js/init/select_modal2.js') }}"></script>
 	@yield('js')
 </body>
 </html>

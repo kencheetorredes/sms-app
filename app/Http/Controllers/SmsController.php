@@ -25,7 +25,7 @@ class SmsController extends Controller
      */
     public function create()
     {
-        return view('sms.compose');
+        return view('sms.compose.index');
     }
 
     /**
