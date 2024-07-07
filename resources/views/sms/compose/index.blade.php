@@ -4,6 +4,10 @@
     .select2-container {
     z-index: unset;
 }
+.main-wrapper{
+        min-height:100vh;
+        height:auto
+}
 </style>
 @endsection
 @section('content')

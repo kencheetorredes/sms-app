@@ -2,6 +2,12 @@
 
 @section('css')
 <link href="{{ url('common/bootstrap-table.css') }}" rel="stylesheet">
+<style>
+    .main-wrapper{
+        min-height:100vh;
+        height:auto
+    }
+</style>
 @endsection
 
 @section('content')

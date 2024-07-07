@@ -186,7 +186,7 @@ class ContactController extends Controller
                 }
             }
 
-            $slide_data_import  = array_chunk($datas, 10);
+            $slide_data_import  = array_chunk($datas, 5);
 
             $last_page          = array_key_last($slide_data_import);
             $current_page       = $request->current_page ? $request->current_page : 0;
@@ -194,26 +194,41 @@ class ContactController extends Controller
 
             if(in_array('name',$header) && in_array('country',$header) && in_array('mobile',$header)){
                 
-                // foreach($slide_data_import[$current_page] as $data_){
-                //     $verify         = Contacts::where('mobile',$data_['mobile'])->first();
-                //     $countryCode    = CountryCodes::where('country',strtolower($data_['country']))->first();
+                foreach($slide_data_import[$current_page] as $data_){
+                    $verify         = Contacts::where('mobile',$data_['mobile'])->first();
+                    $countryCode    = CountryCodes::where('country',strtolower($data_['country']))->first();
 
-                //     if($countryCode){
-                //         if(!$verify){
-                //             Contacts::create([
-                //                 'name'                => $data_['name'],
-                //                 'mobile'              => $data_['mobile'],
-                //                 'country_code_id'     => $countryCode->id,
-                //                 'group_id'            => $dataPatch[1],
-                //             ]);
-                //         } else {
-                //             $verify->country_code_id = $countryCode->id;
-                //             $verify->group_id = $dataPatch[1];
-                //             $verify->save();
-                //         }
-                //     }
+                    if($data_['group'] != ''){
+                        $groups = Groups::where('name',$data_['group'])->first();
+                        if(!$groups){
+                            $group = Groups::create([
+                                'name' => $data_['group']
+                            ]);
+                            $group_id = $group->id;
+                        } else {
+                            $group_id = $groups->id;
+                        }
+                    } else {
+                        $group_id = null;
+                    }
                    
-                // }
+                    if($countryCode){
+                        if(!$verify){
+                            Contacts::create([
+                                'name'                => $data_['name'],
+                                'mobile'              => $data_['mobile'],
+                                'country_code_id'     => $countryCode->id,
+                                'group_id'            => $group_id,
+                            ]);
+                        } else {
+                            $verify->name               = $data_['name'];
+                            $verify->country_code_id    = $countryCode->id;
+                            $verify->group_id           = $group_id;
+                            $verify->save();
+                        }
+                    }
+                   
+                }
 
                 return [
                     'file' => $request->file,
