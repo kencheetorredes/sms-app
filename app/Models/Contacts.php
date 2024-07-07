@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\CountryCodes;
 use Illuminate\Database\Eloquent\Model;
 
 class Contacts extends Model
@@ -10,9 +11,13 @@ class Contacts extends Model
     'name',
     'mobile',
     'group_id',
-    'country_mobile_code',
+    'country_code_id',
     'status'
    ];
+
+   public function code(){
+    return $this->hasOne(CountryCodes::class,'id','country_code_id');
+   }
 
    public function group(){
     return $this->hasOne(Groups::class,'id','group_id');

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Bkt;
 use App\Models\Groups;
 use App\Models\Contacts;
+use App\Models\CountryCodes;
 use Illuminate\Http\Request;
-use Bkt;
+
 class GroupController extends Controller
 {
 
@@ -219,6 +221,7 @@ class GroupController extends Controller
     public static function process_import($request){
         $path                   = 'public/upload/csv/contacts-group/';
         $datas                  = Bkt::read($request->file,$path);
+        $dataPatch = explode('-',$request->data);
  
         $header = Bkt::readHead($request->file,$path);
         $attributes = array();
@@ -238,11 +241,27 @@ class GroupController extends Controller
             $current_page       = $request->current_page ? $request->current_page : 0;
             $percentage         = ($current_page + 1 ) / count($slide_data_import) * 100;
 
-            if(in_array('name',$header) && in_array('country',$header) && in_array('sku',$header) && in_array('country_code',$header)){
+            if(in_array('name',$header) && in_array('country',$header) && in_array('mobile',$header)){
+                
                 foreach($slide_data_import[$current_page] as $data_){
+                    $verify         = Contacts::where('mobile',$data_['mobile'])->first();
+                    $countryCode    = CountryCodes::where('country',strtolower($data_['country']))->first();
 
-
-
+                    if($countryCode){
+                        if(!$verify){
+                            Contacts::create([
+                                'name'                => $data_['name'],
+                                'mobile'              => $data_['mobile'],
+                                'country_code_id'     => $countryCode->id,
+                                'group_id'            => $dataPatch[1],
+                            ]);
+                        } else {
+                            $verify->country_code_id = $countryCode->id;
+                            $verify->group_id = $dataPatch[1];
+                            $verify->save();
+                        }
+                    }
+                   
                 }
 
                 return [

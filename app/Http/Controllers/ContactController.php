@@ -35,6 +35,7 @@ class ContactController extends Controller
         $results     = Contacts::lists($search, 1, $offset, $limit,$sort,$orderBy)->get();
 
         foreach( $results as  $result){
+            $result->mobile_code = $result->code->code;
             $result->group_name = isset($result->group->name) ? $result->group->name : '';
             $result->status_        = '<span class="mb-1 badge '.config('setting.status.'.$result->status.'.class').'">'.config('setting.status.'.$result->status.'.label').'</span>';
             if($request->group_id){
@@ -72,7 +73,7 @@ class ContactController extends Controller
     {
        $data = $request->validate([
         'name' => 'required|unique:contacts,name',
-        'country_mobile_code' => 'required',
+        'country_code_id' => 'required',
         'mobile' => 'required|unique:contacts,mobile',
         'group_id' => 'exclude_if:group_id,null'
        ]);
@@ -110,7 +111,7 @@ class ContactController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|unique:contacts,name,'.$request->id,
-            'country_mobile_code' => 'required',
+            'country_code_id' => 'required',
             'mobile' => 'required|unique:contacts,mobile,'.$request->id,
            'group_id' => 'exclude_if:group_id,null'
            ]);

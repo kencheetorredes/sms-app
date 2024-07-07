@@ -15,9 +15,9 @@
                     <label for="exampleInputEmail1">Mobile Number</label>
                     <div class="row">
                         <div class="col-md-3">
-                            <select  class="form-control" name="country_mobile_code">
+                            <select  class="form-control" name="country_code_id">
                                 @foreach ($codes as $code)
-                                <option @if($details) @if($details->country_mobile_code == $code->code) selected @endif @endif  value="{{$code->code}}">{{$code->country_short_name.'('.$code->code.')'}}</option>
+                                <option @if($details) @if($details->country_code_id == $code->id) selected @endif @endif  value="{{$code->id}}">{{$code->country_short_name.'('.$code->code.')'}}</option>
                                 @endforeach
                             </select>
                         </div>

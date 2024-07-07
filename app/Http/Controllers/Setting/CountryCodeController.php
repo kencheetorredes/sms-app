@@ -66,6 +66,9 @@ class CountryCodeController extends Controller
             'country_short_name' => 'required'
         ]);
 
+        $data['country'] = strtolower($data['country']);
+        $data['country_short_name'] = strtoupper($data['country_short_name']);
+
         CountryCodes::create($data);
 
         return response()->json([

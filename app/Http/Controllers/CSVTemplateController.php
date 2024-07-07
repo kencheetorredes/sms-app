@@ -22,7 +22,7 @@ class CSVTemplateController extends Controller
             "Expires"             => "0"
         ); 
         
-        $columns = array('name','country','country code','mobile');
+        $columns = array('name','country','mobile');
         
         $callback = function() use( $columns) {
             $file = fopen('php://output', 'w');
@@ -44,7 +44,7 @@ class CSVTemplateController extends Controller
             "Expires"             => "0"
         ); 
         
-        $columns = array('name','country','country code','mobile','group');
+        $columns = array('name','country','mobile','group');
         $callback = function() use( $columns) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);

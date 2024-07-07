@@ -17,7 +17,7 @@
                     <thead  class="alert alert-light solid alert-square solid bordered">
                         <tr>
                             <th data-field="name">Name</th>
-                            <th data-field="country_mobile_code">Country Code</th>
+                            <th data-field="mobile_code">Country Code</th>
                             <th data-field="mobile">Mobile</th>
                             <th  data-field="status_">Status</th>
                             <th  data-field="action"></th>
