@@ -18,7 +18,8 @@ class CreateContactsTable extends Migration
             $table->string('name');
             $table->string('mobile');
             $table->string('country_mobile_code');
-            $table->integer('group_id');
+            $table->integer('group_id')->nullable();
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

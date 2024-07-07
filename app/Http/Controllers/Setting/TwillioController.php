@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Setting;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ContactGroupController extends Controller
+class TwillioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class ContactGroupController extends Controller
      */
     public function index()
     {
-        return view('contact_group.index');
+        //
     }
 
     /**
@@ -23,7 +24,7 @@ class ContactGroupController extends Controller
      */
     public function create()
     {
-        return view('contact_group.form');
+        //
     }
 
     /**

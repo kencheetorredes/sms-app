@@ -24,7 +24,7 @@
                             </li>
 
                             <li>
-                                <a href="{{route('contact_group.index')}}" class="chat-unread " data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Contact Groups">
+                                <a href="{{route('group.index')}}" class="chat-unread " data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Contact Groups">
                                  <i class='bx bxs-group'></i>
                                 </a>
                             </li>
@@ -34,6 +34,10 @@
                                  <i class='bx bxs-file-doc'></i>
                                 </a>
                             </li>
+
+                           
+
+                            
                         </ul>
                     </div>
                     <div class="bottom-menus">
@@ -52,7 +56,9 @@
                                         <img src="assets/img/avatar/avatar-2.jpg" alt="">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end">
-                                        <a href="settings.html" class="dropdown-item"><span><i class="bx bx-cog"></i></span>Settings</a>
+                                    <a href="{{route('setting.country_code.index')}}" class="dropdown-item"><span><i class="bx bx-cog"></i></span>Country Code</a>
+                                    <a href="settings.html" class="dropdown-item"><span><i class="bx bx-cog"></i></span>Twillio</a>
+                                    <a href="settings.html" class="dropdown-item"><span><i class="bx bx-cog"></i></span>Users</a>
                                         <a href="email-login.html" class="dropdown-item"><span><i class="bx bx-log-out"></i></span>Logout </a>
                                     </div>
                                 </div>

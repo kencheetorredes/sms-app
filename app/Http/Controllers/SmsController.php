@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Groups;
+use App\Models\Contacts;
+use App\Models\Templates;
 use Illuminate\Http\Request;
 
 class SmsController extends Controller
@@ -25,7 +28,11 @@ class SmsController extends Controller
      */
     public function create()
     {
-        return view('sms.compose.index');
+        return view('sms.compose.index',[
+            'groups' => Groups::all(),
+            'contacts' => Contacts::where('status',1)->get(),
+            'templates' => Templates::where('status',1)->get()
+        ]);
     }
 
     /**

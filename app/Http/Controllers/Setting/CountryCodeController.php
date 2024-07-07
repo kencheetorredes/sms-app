@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Setting;
 
-use App\Models\Templates;
+use App\Models\CountryCodes;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class TemplateController extends Controller
+class CountryCodeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +15,10 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        return view('sms.template.index');
+       return view('setting.country_code.index');
     }
 
-    /**
+     /**
      * listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -30,15 +31,12 @@ class TemplateController extends Controller
 
         $sort        = $request->sort;
         $orderBy     = $request->order;
-        $results     = Templates::lists($search, 1, $offset, $limit,$sort,$orderBy)->get();
+        $results     = CountryCodes::lists($search, 1, $offset, $limit,$sort,$orderBy)->get();
 
-        foreach( $results as  $result){
-            $result->status_        = '<span class="mb-1 badge '.config('setting.status.'.$result->status.'.class').'">'.config('setting.status.'.$result->status.'.label').'</span>';
-        }
-
+       
         return response()->json([
             'rows' => $results,
-            'total' => Templates::lists($search)->count()
+            'total' => CountryCodes::lists($search)->count()
         ]);
     }
 
@@ -49,10 +47,9 @@ class TemplateController extends Controller
      */
     public function create($id = '')
     {
-        $details = Templates::where('id',$id)->first();
-        return view('sms.template.form',[
-            'details' => $details
-        ]);
+        return view('setting.country_code.form',[
+            'details' =>  CountryCodes::where('id',$id)->first()
+       ]);
     }
 
     /**
@@ -64,20 +61,22 @@ class TemplateController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|unique:templates,name',
-            'content' => 'required'
+            'country' => 'required|unique:country_codes,country',
+            'code'    => 'required',
+            'country_short_name' => 'required'
         ]);
 
-        Templates::create($data);
+        CountryCodes::create($data);
 
         return response()->json([
             'code'   => 200,
-            'msg'    => 'New Template has been saved',
+            'msg'    => 'New Country Code has been saved',
             'target' => 'list_table'
         ]);
+
+
     }
 
-    
 
     /**
      * Update the specified resource in storage.
@@ -89,19 +88,29 @@ class TemplateController extends Controller
     public function update(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|unique:templates,name,'.$request->id,
-            'content' => 'required',
-            'status' => 'required'
+            'country' => 'required|unique:country_codes,country,'.$request->id,
+            'code'    => 'required',
+            'country_short_name' => 'required'
         ]);
-
-        Templates::where('id',$request->id)->update($data);
+        CountryCodes::where('id',$request->id)->update($data);
+       
 
         return response()->json([
             'code'   => 200,
-            'msg'    => 'Template has been updated',
+            'msg'    => ' Country Code has been updated',
             'target' => 'list_table'
         ]);
 
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 }

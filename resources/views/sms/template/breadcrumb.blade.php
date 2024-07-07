@@ -6,7 +6,7 @@
                 </div>
             </div>
             <div class="col-md-7 justify-content-end align-self-center d-md-flex">
-                <a class="btn btn-primary " href="{{route('sms_template.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New</a>
+            <a class="btn btn-primary pop-up" data-template="{{route('sms_template.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New</a>
             </div>
         </div>
     </div>

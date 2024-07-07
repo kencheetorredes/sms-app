@@ -1,5 +1,11 @@
 @extends('layout')
-
+@section('css')
+<style>
+    .select2-container {
+    z-index: unset;
+}
+</style>
+@endsection
 @section('content')
     <div class="container-fluid  main-bkt-div">
     @include('sms.compose.breadcrumb')
@@ -8,29 +14,47 @@
             <div class="card ">
                 <div class="card-body p-1">
                     <form action="">
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Message Type</label>
-                            <select name="" id="" class="form-control">
+                        <div>
+                            <label for="name" class="form-label">Message Type</label>
+                            <select name="" id="name" class="form-control select2 ">
                                 <option value=""></option>
+                                @foreach (config('setting.message_types') as $key => $message_types)
+                                <option value="{{$key}}">{{$message_types}}</option>
+                                @endforeach
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <label  class="form-label">Contact</label>
-                            <input type="email" class="form-control" >
-                        </div>
-                        <div class="mb-3">
+                        
+                            <label class="form-label mt-2">Contact</label>
+                            <select name="contact_id" class="form-control select2"  multiple>
+                                <option value=""></option>
+                                @foreach ($contacts as $key => $contact)
+                                <option value="{{$contact->id}}">{{$contact->name}}</option>
+                                @endforeach
+                            </select>
+                            
+                        <div>
                             <label  class="form-label">Group</label>
-                            <input type="email" class="form-control" >
+                            <select name="group_id" class="form-control select2"  multiple>
+                                <option value=""></option>
+                                @foreach ($groups as $key => $group)
+                                <option value="{{$group->id}}">{{$group->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="form-group">
                             <label  class="form-label">Template</label>
-                            <input type="email" class="form-control" >
+                            <select name="" id="" class="form-control select2">
+                                <option value=""></option>
+                                @foreach ($templates as $key => $template)
+                                <option value="{{$template->id}}">{{$template->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="form-group">
                             <label class="form-label">Message</label>
-                            <textarea name="" id="" class="form-control"></textarea>
+                            <textarea name="" id="" rows="10" class="form-control"></textarea>
                         </div>
 
                         <button class="btn btn-primary float-end">Send</button>

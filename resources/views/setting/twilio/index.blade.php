@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container-fluid  main-bkt-div">
-    @include('contact_group.breadcrumb')
+    @include('contact.breadcrumb')
     <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -16,6 +16,9 @@
                     <thead  class="alert alert-light solid alert-square solid bordered">
                         <tr>
                             <th data-field="image">Name</th>
+                            <th data-field="image">Country Code</th>
+                            <th data-field="image">Mobile</th>
+                            <th data-field="image">Group</th>
                             <th data-sortable="true" data-field="status_">Status</th>
                         </tr>
                     </thead>

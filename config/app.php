@@ -226,7 +226,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Bkt' => App\Helper\Bkt\setting::class,
+        'CommonLib' => App\Helper\Bkt\CommonLib::class,
     ],
 
 ];

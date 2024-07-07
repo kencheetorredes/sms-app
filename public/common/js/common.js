@@ -84,11 +84,11 @@ $(function () {
             $('.alert-msg').remove();  
             
             if (!validation(form,false)) { 
-            
-                fireLoading();
+                btnLoading($this);
+               // fireLoading();
                 var responce = DataWithIMageHadler(form, method, action, data); 
                     responce.done(function (response, textStatus, jqXHR) {
-                        killLoading();
+                        killBtnLoading($this);
                         if(response.code == 300){
                             form.prepend(errorDiv.replace('error',response.msg ));
                             kill_alert();
@@ -123,7 +123,7 @@ $(function () {
                             
                         }
                     }).fail(function (response, textStatus, jqXHR) {
-                        killLoading();
+                        killBtnLoading($this);
                         $('.invalid-feedback').remove();
                         $('.form-control').each(function(e){
                             $(this).removeClass('is-invalid')
@@ -448,6 +448,16 @@ function clearForm(form){
         $thiss.val('');
     });
 }
+
+const btnLoading = ($this) => {
+    $this.attr('disabled','disabled');
+    $this.prepend('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ');
+}
+const killBtnLoading = ($this) => {
+    $this.removeAttr('disabled');
+    $this.find('.spinner-border').remove();
+}
+
 
 function fireLoading(msg = '',trans = 1){
     $('.modal-footer').hide();
