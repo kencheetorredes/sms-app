@@ -6,7 +6,7 @@ use App\Models\Groups;
 use App\Models\Contacts;
 use App\Models\CountryCodes;
 use Illuminate\Http\Request;
-
+use Bkt;
 class ContactController extends Controller
 {
     /**
@@ -49,6 +49,18 @@ class ContactController extends Controller
         ]);
     }
 
+
+    
+    /**
+     * Show the form for import a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function import()
+    {
+       return view('contact.import');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -89,16 +101,6 @@ class ContactController extends Controller
 
     
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -126,13 +128,120 @@ class ContactController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function otherProcess(Request $request)
     {
-        //
+        if($request->data){
+            $mod = explode('-',$request->data);
+            $module = 'process_'.$mod[0];
+        } else {
+            $module = 'process_'.$request->action;
+        }
+
+       
+        return self::$module($request);
+    }
+
+
+    public static function process_upload($request){
+
+        $data = $request->validate([
+            'files' => 'required|mimes:csv,txt'
+        ]);
+        
+       
+        $path        = 'upload/csv/contacts/';
+        $file_name   =  Bkt::uploadFiles($request->file('files'),$path,'',1);
+        $code        = 200;
+        $table       = "list_table";
+       
+
+        return [
+            'code'          => $code,
+            'data'          => 'import'.'-'.$request->id,
+            'current_page'  => 0,
+            'file'          => $file_name,
+            'percentage'    => 0,
+            'url'           => route('contacts.otherProcess')
+        ];
+
+    }
+
+    public static function process_import($request){
+        $path                   = 'public/upload/csv/contacts/';
+        $datas                  = Bkt::read($request->file,$path);
+        $dataPatch = explode('-',$request->data);
+ 
+        $header = Bkt::readHead($request->file,$path);
+        $attributes = array();
+
+        if(count($datas) > 0){
+
+            foreach($header as $k=> $v) {
+                $j = explode('_',$v);
+                if( $j[0] == 'attr') {
+                    $attributes[] = $j[1];
+                }
+            }
+
+            $slide_data_import  = array_chunk($datas, 10);
+
+            $last_page          = array_key_last($slide_data_import);
+            $current_page       = $request->current_page ? $request->current_page : 0;
+            $percentage         = ($current_page + 1 ) / count($slide_data_import) * 100;
+
+            if(in_array('name',$header) && in_array('country',$header) && in_array('mobile',$header)){
+                
+                // foreach($slide_data_import[$current_page] as $data_){
+                //     $verify         = Contacts::where('mobile',$data_['mobile'])->first();
+                //     $countryCode    = CountryCodes::where('country',strtolower($data_['country']))->first();
+
+                //     if($countryCode){
+                //         if(!$verify){
+                //             Contacts::create([
+                //                 'name'                => $data_['name'],
+                //                 'mobile'              => $data_['mobile'],
+                //                 'country_code_id'     => $countryCode->id,
+                //                 'group_id'            => $dataPatch[1],
+                //             ]);
+                //         } else {
+                //             $verify->country_code_id = $countryCode->id;
+                //             $verify->group_id = $dataPatch[1];
+                //             $verify->save();
+                //         }
+                //     }
+                   
+                // }
+
+                return [
+                    'file' => $request->file,
+                    'is_last' => $last_page == $current_page ? true : false,
+                    'last_page'    => $last_page,
+                    'current_page' =>  $current_page + 1,
+                    'percentage' => $percentage,
+                    'table' => 'list_table',
+                    'msg'   => 'data has been imported succesfully',
+                    'url'   => route('contacts.otherProcess'),
+                    'data'  => $request->data
+                ];
+
+            } else {
+                return [
+                    'code' => 300,
+                    'msg'  => 'Invalid Template'
+                ];
+            }
+
+
+
+        } else {
+            return [
+                'code' => 300,
+                'msg'  => 'Template Should not be empty'
+             ];
+        }
+
     }
 }

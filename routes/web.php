@@ -42,6 +42,8 @@ Route::name('contacts.')->prefix('/contacts')->group(function(){
     Route::get('/form/{id?}',[ContactController::class,'create'])->name('create');
     Route::post('/store',[ContactController::class, 'store'])->name('store');
     Route::post('/update',[ContactController::class, 'update'])->name('update');
+    Route::get('/import',[ContactController::class,'import'])->name('import');
+    Route::post('/other-process',[ContactController::class, 'otherProcess'])->name('otherProcess');
 });
 
 Route::name('group.')->prefix('/groups')->group(function(){

@@ -29,3 +29,6 @@
 </div>
 </div>
 @endsection
+@section('js')
+<script src="{{ url('common/js/import.js') }}"></script>
+@endsection

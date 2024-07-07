@@ -29,8 +29,8 @@
     </div>
 </div>
 </div>
+@endsection
 @section('js')
 <script src="{{url('assets/js/sms/group.js')}}"></script> 
 <script src="{{ url('common/js/import.js') }}"></script>
-@endsection
 @endsection
