@@ -6,31 +6,31 @@
                     <div class="chat-menus">
                         <ul>
                             <li>
-                                <a href="{{route('message.index')}}" class="chat-unread active" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Inbox">
+                                <a href="{{route('message.index')}}" class="chat-unread {{ Route::is('message.index') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Inbox">
                                     <i class="bx bxs-inbox"></i>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="{{route('message.compose')}}" class="chat-unread " data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Compose">
+                                <a href="{{route('message.compose')}}" class="chat-unread {{ Route::is('message.compose') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Compose">
                                 <i class='bx bxs-comment-edit'></i>
                                 </a>
                             </li>
                             
                             <li>
-                                <a  href="{{route('contacts.index')}}" class="chat-unread " data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Contact List">
+                                <a  href="{{route('contacts.index')}}" class="chat-unread {{ Route::is('contacts.*') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Contact List">
                                     <i class='bx bxs-contact'></i>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="{{route('group.index')}}" class="chat-unread " data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Contact Groups">
+                                <a href="{{route('group.index')}}" class="chat-unread {{ Route::is('group.*') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Contact Groups">
                                  <i class='bx bxs-group'></i>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="{{route('sms_template.index')}}" class="chat-unread " data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Template">
+                                <a href="{{route('sms_template.index')}}" class="chat-unread {{ Route::is('sms_template.*') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Template">
                                  <i class='bx bxs-file-doc'></i>
                                 </a>
                             </li>
