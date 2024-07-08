@@ -119,6 +119,9 @@ $(function () {
                             } else if(response.code == 203){
                                 form.prepend(successDiv.replace('success-mg',response.msg ));
                                 kill_alert(); 
+                            } else if(response.code == 205){
+                                kill_modal();
+                                $('#'+response.target+'').prepend(response.msg);
                             }
                             
                         }

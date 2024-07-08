@@ -36,14 +36,21 @@ class SmsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * send sms.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function send(Request $request)
     {
-        //
+        $data = $request->validate([
+            'type' => 'required',
+            'contacts' => 'required_if:type,0|array|min:1',
+            'contacts.*' => 'required',
+            'message' => 'required|min:10|max:160'
+        ]);
+
+        dd($data);
     }
 
     /**

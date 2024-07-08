@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Bkt;
 use App\Models\Groups;
 use App\Models\Contacts;
+use App\Models\Templates;
 use App\Models\CountryCodes;
 use Illuminate\Http\Request;
-use Bkt;
+
 class ContactController extends Controller
 {
     /**
@@ -66,12 +68,13 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id = '')
+    public function create(Request $request,$id = '')
     {
        return view('contact.form',[
             'codes'   => CountryCodes::all(),
             'groups'  => Groups::get(),
-            'details' =>  Contacts::where('id',$id)->first()
+            'details' =>  Contacts::where('id',$id)->first(),
+            'dom'     => $request->dom
        ]);
     }
 
@@ -90,12 +93,12 @@ class ContactController extends Controller
         'group_id' => 'exclude_if:group_id,null'
        ]);
 
-       Contacts::create($data);
+       $contact = Contacts::create($data);
 
         return response()->json([
-            'code'   => 200,
-            'msg'    => 'New Contact has been saved',
-            'target' => 'list_table'
+            'code'   => $request->dom ? 205 : 200,
+            'msg'    => $request->dom ? '<option value="'.$contact->id.'" selected>'.$data['name'].'</option>' : 'New Contact has been saved',
+            'target' => $request->dom ? 'contact_id' : 'list_table'
         ]);
     }
 
@@ -142,6 +145,11 @@ class ContactController extends Controller
 
        
         return self::$module($request);
+    }
+
+    public static function process_getTemplateContent($request){
+        $content = Templates::where('id',$request->id)->pluck('content')->first();
+        return $content;
     }
 
 

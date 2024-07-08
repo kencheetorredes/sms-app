@@ -1,6 +1,6 @@
 <div class="sidebar-menu">
                 <div class="logo-col">
-                    <a href="index.html"><img src="assets/img/logo.png" alt="Logo"></a>
+                    <a href="index.html"><img src="{{url('assets/img/logo.png')}}" alt="Logo"></a>
                 </div>
                 <div class="menus-col">
                     <div class="chat-menus">

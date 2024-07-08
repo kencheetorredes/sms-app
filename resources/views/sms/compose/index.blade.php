@@ -17,38 +17,37 @@
         <div class="col-12 col-md-6">
             <div class="card ">
                 <div class="card-body p-1">
-                    <form action="">
-                        <div>
+                    <form action="{{route('message.send')}}" method="post" id="btk-form">
+                        <div class="mb-2">
                             <label for="name" class="form-label">Message Type</label>
-                            <select name="" id="name" class="form-control select2 ">
+                            <select name="type"  class="form-control select2 changeType">
                                 <option value=""></option>
                                 @foreach (config('setting.message_types') as $key => $message_types)
-                                <option value="{{$key}}">{{$message_types}}</option>
+                                <option data-target="{{$message_types['target']}}" value="{{$key}}">{{$message_types['label']}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        
+                        <div class="contact_type d-none mb-2" id="contact_div">
                             <label class="form-label mt-2">Contact</label>
-                            <select name="contact_id" class="form-control select2"  multiple>
-                                <option value=""></option>
+                            <button class="btn btn-sm btn-primary float-end mb-2 pop-up" data-template="{{route('contacts.create')}}?dom=1">+</button>
+                            <select name="contacts" id="contact_id" class="form-control select2"  multiple>
                                 @foreach ($contacts as $key => $contact)
                                 <option value="{{$contact->id}}">{{$contact->name}}</option>
                                 @endforeach
                             </select>
-                            
-                        <div>
+                        </div>
+                        <div class="contact_type d-none mb-2" id="group_div">
                             <label  class="form-label">Group</label>
-                            <select name="group_id" class="form-control select2"  multiple>
-                                <option value=""></option>
+                            <select name="groups" class="form-control select2"  multiple>
                                 @foreach ($groups as $key => $group)
                                 <option value="{{$group->id}}">{{$group->name}}</option>
                                 @endforeach
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mb-2">
                             <label  class="form-label">Template</label>
-                            <select name="" id="" class="form-control select2">
+                            <select  class="form-control select2 getTemplate" data-url="{{route('contacts.otherProcess')}}" data-target="#messages">
                                 <option value=""></option>
                                 @foreach ($templates as $key => $template)
                                 <option value="{{$template->id}}">{{$template->name}}</option>
@@ -56,16 +55,19 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mb-2">
                             <label class="form-label">Message</label>
-                            <textarea name="" id="" rows="10" class="form-control"></textarea>
+                            <textarea name="message" id="messages" rows="10" class="form-control"></textarea>
                         </div>
 
-                        <button class="btn btn-primary float-end">Send</button>
+                        <button class="btn btn-primary float-end cuBtn"  data-form="btk-form">Send</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
    </div>
+@endsection
+@section('js')
+<script src="{{url('assets/js/sms/compose-sms.js')}}"></script> 
 @endsection

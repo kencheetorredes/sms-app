@@ -26,6 +26,7 @@ Route::get('/', function () {
 Route::name('message.')->prefix('/message')->group(function(){
     Route::get('/inbox',[SmsController::class,'index'])->name('index');
     Route::get('/compose',[SmsController::class,'create'])->name('compose');
+    Route::post('/send',[SmsController::class,'send'])->name('send');
 });
 
 Route::name('sms_template.')->prefix('/sms-template')->group(function(){
@@ -73,7 +74,5 @@ Route::name('setting.')->prefix('/setting')->group(function(){
         Route::post('/store',[CountryCodeController::class, 'store'])->name('store');
         Route::post('/update',[CountryCodeController::class, 'update'])->name('update');
     });
-
-
 
 });

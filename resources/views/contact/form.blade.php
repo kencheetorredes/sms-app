@@ -37,6 +37,10 @@
                     </select>
                 </div>
 
+                @if($dom)
+                <input type="hidden" value="1" name="dom">
+                @endif
+
                 @if($details)
                 <input type="hidden" name="id" value="{{$details->id}}">
                 <div class="form-group">

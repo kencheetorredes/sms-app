@@ -11,8 +11,14 @@ return [
             'class' => 'text-white bg-success'
         ]
     ],
-     'message_types' => [
-        'Contacts',
-        'Group'
-     ]
+    'message_types' => [
+        0 => [
+            'label' => 'Contacts',
+            'target' => '#contact_div'
+        ],
+        1 => [
+            'label' => 'Group',
+            'target' => '#group_div'
+        ]
+    ]
 ];
