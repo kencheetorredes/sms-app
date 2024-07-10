@@ -26,6 +26,9 @@ Route::get('/', function () {
 Route::name('message.')->prefix('/message')->group(function(){
     Route::get('/inbox',[SmsController::class,'index'])->name('index');
     Route::get('/compose',[SmsController::class,'create'])->name('compose');
+    Route::get('/lists',[SmsController::class,'lists'])->name('lists');
+    Route::get('/view/{number}/{client_id}/{twillio_no}',[SmsController::class,'show'])->name('view');
+    
     Route::post('/send',[SmsController::class,'send'])->name('send');
 });
 

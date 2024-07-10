@@ -42,18 +42,8 @@
             <!-- /Left Chat Title -->
 
             <ul class="user-list space-chat">
-                <li class="user-list-item chat-user-list">
-                    <a href="chat.html" >
-                        <div class="users-list-body">
-                            <div>
-                                <h5>Mark Villiams</h5>
-                                <p>Have you called them?</p>
-                            </div>
-                            <div class="last-chat-time">
-                                <small class="text-muted">10:20 PM</small>
-                            </div>    
-                        </div>
-                    </a>
+                <li class="user-list-item chat-user-list onloadpage" data-url="{{route('message.lists')}}">
+                    
                 </li>
             </ul>
            

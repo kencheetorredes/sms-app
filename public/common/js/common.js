@@ -117,11 +117,27 @@ $(function () {
                                 }
 
                             } else if(response.code == 203){
+                                clearForm(form);
                                 form.prepend(successDiv.replace('success-mg',response.msg ));
                                 kill_alert(); 
                             } else if(response.code == 205){
                                 kill_modal();
                                 $('#'+response.target+'').prepend(response.msg);
+                            } else if(response.code == 206){
+                                Swal.fire({
+                                    title: 'Success',
+                                    text: response.msg,
+                                    type: 'success',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Ok',
+                                    showLoaderOnConfirm: true,
+                                    allowOutsideClick:false,
+                                    allowEscapeKey:false
+                
+                                }).then(($result) => {
+                                    window.location.reload()
+                                }); 
                             }
                             
                         }
@@ -135,7 +151,12 @@ $(function () {
                         if(response.status == 422){
                             $.each(response.responseJSON.errors, function(key, item) 
                             {
+                                
                                 selector = document.getElementsByName(key);
+                                
+                                if(selector.length == 0){
+                                    selector = document.getElementsByName(key+'[]');
+                                } 
                                 $(selector).addClass('is-invalid').after('<div class="invalid-feedback">'+item[0]+'</div>');
                             });
                         } else {
@@ -446,7 +467,7 @@ function DataHadler(form, method, action, data){
 }
 
 function clearForm(form){
-    form.find('input.required,select.required,textarea.required,file.required').each(function (e) {
+    form.find('input,select,textarea,file').each(function (e) {
         var $thiss = $(this);
         $thiss.val('');
     });

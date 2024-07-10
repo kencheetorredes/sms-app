@@ -6,7 +6,16 @@ use Mail;
 
 class setting {
     
-    
+    public static function shortcode( $letters,$data){
+        $regex = "/\[(.*?)\]/";
+        preg_match_all($regex, $letters, $matches);
+        if(count($matches[1]) > 0){
+            foreach($matches[1] as $key => $match){
+                $letters = str_replace($matches[0][$key],$data[$match],$letters);
+            }
+        }
+        return $letters;
+    }
 
     /**
       * Generate Password

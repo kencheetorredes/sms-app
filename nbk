@@ -1,0 +1,25 @@
+$to =  Carbon::parse(date('Y-m-d H:i:s'));
+       $from =  Carbon::parse($date);
+       
+        $months = $to->diffInMonths($from);
+        $weeks = $to->diffInWeeks($from);
+        $days = $to->diffInDays($from);
+        $hours = $to->diffInHours($from);
+        $minutes = $to->diffInMinutes($from);
+        $seconds = $to->diffInSeconds($from);
+
+        if($months > 0){
+            $return = $months." month's ago";
+        } else if($weeks > 0){
+            $return = $weeks." week's ago";
+        } else if($days > 0){
+            $return = $days." day's ago";
+        } else if($hours > 0){
+            $return = $hours." hours's ago";
+        }  else if($minutes > 0){
+            $return = $minutes." minute's ago";
+        } else {
+            $return = $seconds." second's ago";
+        }
+        
+        return $return;
