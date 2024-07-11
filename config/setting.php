@@ -20,5 +20,15 @@ return [
             'label' => 'Group',
             'target' => '#group_div'
         ]
+     ],
+        'roles' => [
+            0 => [
+                'label' => 'Admin',
+                'class' => 'text-white bg-danger'
+            ],
+            1 => [
+                'label' => 'User',
+                'class' => 'text-white bg-success'
+            ]
     ]
 ];

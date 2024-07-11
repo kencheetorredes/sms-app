@@ -24,3 +24,10 @@
 .pull-right{
     float: right  !important;
 }
+
+.seeMessages.active {
+    background-color: #F8ECFF;
+    transition: ease all 0.5s;
+    -webkit-transition: ease all 0.5s;
+    -ms-transition: ease all 0.5s;
+}

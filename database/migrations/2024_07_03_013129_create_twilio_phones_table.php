@@ -16,7 +16,8 @@ class CreateTwilioPhonesTable extends Migration
         Schema::create('twilio_phones', function (Blueprint $table) {
             $table->id();
             $table->string('mobile');
-            $table->integer('status');
+            $table->integer('status')->default(1);
+            $table->string('label');
             $table->timestamps();
         });
     }

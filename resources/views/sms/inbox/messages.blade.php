@@ -12,7 +12,7 @@
                                 </ul>
                             </div>
                             <div class="mt-1">
-                                <h5>{{$user ? $user->name : $number }}</h5>
+                                <h5>{{$user ? $user->name : $number }}<br><br></h5>
                             </div>
                         </div>
                         <div class="chat-options ">
@@ -44,7 +44,7 @@
                                            {{ $message->message }}
                                         </div>
                                         <div class="chat-profile-name done">
-                                            <h6><span>{{ date('d',strtotime($message->created_at)) == date('d') ? date('H:s A',strtotime($message->created_at)) :  $list->created_at }}</span>
+                                            <h6><span>{{ date('d',strtotime($message->created_at)) == date('d') ? date('H:s A',strtotime($message->created_at)) :  $message->created_at }}</span>
                                            </h6>
                                         </div>
                                     </div>
@@ -57,43 +57,12 @@
                 <div class="chat-footer">
                     <form>
                         <div class="replay-forms">
-                            <div class="chats forward-chat-msg reply-div d-none">
-                                <div class="contact-close_call text-end">
-                                    <a href="#" class="close-replay">
-                                        <i class="bx bx-x"></i>
-                                    </a>
-                                </div>
-                                <div class="chat-avatar">
-                                    <img src="assets/img/avatar/avatar-2.jpg" class="rounded-circle dreams_chat" alt="image">
-                                </div>
-                                <div class="chat-content">
-                                    <div class="chat-profile-name">
-                                        <h6>Mark Villiams<span>8:16 PM</span></h6>
-                                        <div class="chat-action-btns ms-2">
-                                            <div class="chat-action-col">
-                                                <a class="#" href="#" data-bs-toggle="dropdown">
-                                                    <i class="bx bx-dots-horizontal-rounded"></i>
-                                                </a>
-                                                <div class="dropdown-menu chat-drop-menu dropdown-menu-end">
-                                                    <a href="#" class="dropdown-item message-info-left"><span><i class="bx bx-info-circle"></i></span>Message Info </a>
-                                                    <a href="#" class="dropdown-item reply-button"><span><i class="bx bx-share"></i></span>Reply</a>
-                                                    <a href="#" class="dropdown-item"><span><i class="bx bx-smile"></i></span>React</a>
-                                                    <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#forward-message"><span><i class="bx bx-reply"></i></span>Forward</a>
-                                                    <a href="#" class="dropdown-item"><span><i class="bx bx-star"></i></span>Star Message</a>
-                                                    <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#report-user"><span><i class="bx bx-dislike"></i></span>Report</a>
-                                                    <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#delete-message"><span><i class="bx bx-trash"></i></span>Delete</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="message-content reply-content">
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="text" class="form-control chat_form" placeholder="Type your message here...">
+                            <input type="text" name="message" id="chat_msg" class="form-control chat_form" placeholder="Type your message here...">
                         </div>
+                        <input type="hidden" name="client_id" value="{{$user ? $user->id : ''}}">
+                        <input type="hidden" name="twillio_no" value="{{$twillio_no}}">
                         <div class="form-buttons">
-                            <button class="btn send-btn" type="submit">
+                            <button class="btn send-btn replyBtn {{!$user ? 'disabled' : ''}}" type="submit">
                                 <i class="bx bx-paper-plane"></i>
                             </button>
                         </div>

@@ -7,10 +7,10 @@
     <meta name="author" content="kenchee torredes">
     <meta name="robots" content="noindex,nofollow" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-	<title>DreamsChat</title>
+	<title>HIRAS SMS</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="{{url('assets/img/favicon.png')}}">
+    <link rel="icon" href="{{url('assets/img/logo-new.png')}}">
 	
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{url('assets/css/bootstrap.min.css')}}">

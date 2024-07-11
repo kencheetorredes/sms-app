@@ -1,12 +1,12 @@
 <div class="sidebar-menu">
                 <div class="logo-col">
-                    <a href="index.html"><img src="{{url('assets/img/logo.png')}}" alt="Logo"></a>
+                    <a href="/"><img style="width: 55px;" src="{{url('assets/img/logo-new.png')}}" alt="Logo"></a>
                 </div>
                 <div class="menus-col">
                     <div class="chat-menus">
                         <ul>
                             <li>
-                                <a href="{{route('message.index')}}" class="chat-unread {{ Route::is('message.index') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Inbox">
+                                <a href="{{route('message.index',CommonLib::currentTwillioNo())}}" class="chat-unread {{ Route::is('message.index') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Inbox">
                                     <i class="bx bxs-inbox"></i>
                                 </a>
                             </li>
@@ -34,10 +34,33 @@
                                  <i class='bx bxs-file-doc'></i>
                                 </a>
                             </li>
+                            @if(CommonLib::getRole() == 0)
+                            <li>
+                                <a href="{{route('setting.country_code.index')}}" class="chat-unread {{ Route::is('sms_template.*') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Country Code">
+                                 <i class='bx bxs-flag'></i>
+                                </a>
+                            </li>
 
                            
 
-                            
+                            <li>
+                                <a href="{{route('setting.twillio.index')}}" class="chat-unread {{ Route::is('setting.twillio.*') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Twillio Number">
+                                 <i class='bx bxs-phone'></i>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{route('setting.users.index')}}" class="chat-unread {{ Route::is('setting.users.*') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Users">
+                                 <i class='bx bxs-user'></i>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{route('setting.logs.index')}}" class="chat-unread {{ Route::is('setting.logs.*') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Error Logs">
+                                <i class='bx bxs-error'></i>
+                                </a>
+                            </li>
+                            @endif
                         </ul>
                     </div>
                     <div class="bottom-menus">
@@ -53,13 +76,11 @@
                             <li>
                                 <div class="avatar avatar-online">
                                     <a href="#" class="chat-profile-icon" data-bs-toggle="dropdown">
-                                        <img src="assets/img/avatar/avatar-2.jpg" alt="">
+                                        <img src="{{url('assets/img/avatar/avatar-2.jpg')}}" alt="">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end">
-                                    <a href="{{route('setting.country_code.index')}}" class="dropdown-item"><span><i class="bx bx-cog"></i></span>Country Code</a>
-                                    <a href="settings.html" class="dropdown-item"><span><i class="bx bx-cog"></i></span>Twillio</a>
-                                    <a href="settings.html" class="dropdown-item"><span><i class="bx bx-cog"></i></span>Users</a>
-                                        <a href="email-login.html" class="dropdown-item"><span><i class="bx bx-log-out"></i></span>Logout </a>
+                                    <a href="{{ route('auth.profile') }}" class="dropdown-item">Profile </a>
+                                        <a href="{{ route('auth.logout') }}" class="dropdown-item">Logout </a>
                                     </div>
                                 </div>
                             </li>

@@ -11,11 +11,14 @@
             <div class="select-group-chat">
                 <div class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle" data-bs-toggle="dropdown">
-                        All<i class="bx bx-chevron-down"></i>
+                        {{ $twilliono }}<i class="bx bx-chevron-down"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="chat.html">+0930920932</a></li>
-                        <li><a class="dropdown-item" href="archive-chat.html">+03949302</a></li>
+                        @foreach(CommonLib::usertNumbers() as $usertNumbers)
+                        <li><a class="dropdown-item" href="{{route('message.index',$usertNumbers->number->mobile)}}">
+                            {{ $usertNumbers->number->mobile }}
+                        </a></li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -42,8 +45,7 @@
             <!-- /Left Chat Title -->
 
             <ul class="user-list space-chat">
-                <li class="user-list-item chat-user-list onloadpage" data-url="{{route('message.lists')}}">
-                    
+                <li class="user-list-item chat-user-list onloadpage" data-url="{{route('message.lists',$twillio_id)}}">
                 </li>
             </ul>
            

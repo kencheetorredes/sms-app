@@ -473,12 +473,19 @@ function clearForm(form){
     });
 }
 
-const btnLoading = ($this) => {
+const btnLoading = ($this,html = '') => {
     $this.attr('disabled','disabled');
+    if(html != ''){
+        $this.html('');
+    }
     $this.prepend('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ');
+    
 }
-const killBtnLoading = ($this) => {
+const killBtnLoading = ($this,html = '') => {
     $this.removeAttr('disabled');
+    if(html != ''){
+        $this.html(html);
+    }
     $this.find('.spinner-border').remove();
 }
 

@@ -12,6 +12,7 @@ class Messages extends Model
         'number',
         'type',
         'is_read',
+        'twillio_no_id'
     ];
 
     public function contact(){

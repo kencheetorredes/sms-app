@@ -20,6 +20,7 @@ class CreateMessagesTable extends Migration
             $table->longtext('message');
             $table->integer('type');
             $table->integer('is_read')->default(1);
+            $table->integer('twillio_no_id');
             $table->timestamps();
         });
     }

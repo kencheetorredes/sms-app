@@ -19,6 +19,7 @@ class CreateErrorLogsTable extends Migration
             $table->longtext('error');
             $table->string('number');
             $table->longtext('message');
+            $table->integer('twillio_no_id');
             $table->timestamps();
         });
     }
