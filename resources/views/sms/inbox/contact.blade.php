@@ -15,9 +15,11 @@
                     </a>
                     <ul class="dropdown-menu">
                         @foreach(CommonLib::usertNumbers() as $usertNumbers)
+                        @if($twilliono != $usertNumbers->number->mobile )
                         <li><a class="dropdown-item" href="{{route('message.index',$usertNumbers->number->mobile)}}">
                             {{ $usertNumbers->number->mobile }}
                         </a></li>
+                        @endif
                         @endforeach
                     </ul>
                 </div>

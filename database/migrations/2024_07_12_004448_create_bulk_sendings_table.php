@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMessagesTable extends Migration
+class CreateBulkSendingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('bulk_sendings', function (Blueprint $table) {
             $table->id();
-            $table->integer('client_id');
-            $table->string('number');
-            $table->longtext('message');
-            $table->integer('type');
-            $table->integer('is_read')->default(1);
-            $table->integer('twillio_no_id');
+            $table->integer('group_id');
+            $table->integer('twillio_id');
+            $table->integer('status')->default(0);
+            $table->datetime('scheduled')->nullable();
+            $table->string('message');
             $table->integer('created_by');
+            $table->integer('total');
+            $table->integer('send');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ class CreateMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('bulk_sendings');
     }
 }

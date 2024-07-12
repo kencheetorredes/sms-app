@@ -9,6 +9,7 @@ use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\CSVTemplateController;
 use App\Http\Controllers\Setting\LogController;
 use App\Http\Controllers\Setting\UserController;
+use App\Http\Controllers\Setting\BulkLogController;
 use App\Http\Controllers\Setting\TwillioController;
 use App\Http\Controllers\Setting\CountryCodeController;
 
@@ -34,6 +35,8 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::name('auth.')->prefix('/auth')->group(function(){
         Route::get('/logout',[AuthController::class,'logout'])->name('logout');
         Route::get('/profile',[AuthController::class,'profile'])->name('profile');
+        Route::post('/process_change_password',[AuthController::class,'process_change_password'])->name('process_change_password');
+        
     });
 
     Route::name('message.')->prefix('/message')->group(function(){
@@ -41,7 +44,7 @@ Route::group(['middleware' => 'auth:web'], function () {
         Route::get('/compose',[SmsController::class,'create'])->name('compose');
         Route::get('/lists/{twilliono}',[SmsController::class,'lists'])->name('lists');
         Route::get('/view/{number}/{client_id}/{twillio_no}',[SmsController::class,'show'])->name('view');
-        
+        Route::post('/reply',[SmsController::class,'replyProcess'])->name('reply');
         Route::post('/send',[SmsController::class,'send'])->name('send');
     });
 
@@ -86,6 +89,12 @@ Route::group(['middleware' => 'auth:web'], function () {
             Route::get('/',[LogController::class,'index'])->name('index');
             Route::get('/lists',[LogController::class,'lists'])->name('lists');
             Route::get('/details/{id?}',[LogController::class,'show'])->name('show');
+        });
+
+        Route::name('bulklogs.')->prefix('/bulk-logs')->group(function(){
+            Route::get('/',[BulkLogController::class,'index'])->name('index');
+            Route::get('/lists',[BulkLogController::class,'lists'])->name('lists');
+            Route::get('/details/{id?}',[BulkLogController::class,'show'])->name('show');
         });
 
         Route::name('country_code.')->prefix('/country_code')->group(function(){

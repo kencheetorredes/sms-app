@@ -21,7 +21,7 @@ return [
             'target' => '#group_div'
         ]
      ],
-        'roles' => [
+    'roles' => [
             0 => [
                 'label' => 'Admin',
                 'class' => 'text-white bg-danger'
@@ -30,5 +30,19 @@ return [
                 'label' => 'User',
                 'class' => 'text-white bg-success'
             ]
+    ],
+    'bulk_status' => [
+        0 => [
+            'label' => 'Pending',
+            'class' => 'text-white bg-info'
+        ],
+        1 => [
+            'label' => 'Sending',
+            'class' => 'text-white bg-warning'
+        ],
+        2 => [
+            'label' => 'Completed',
+            'class' => 'text-white bg-success'
+        ]
     ]
 ];

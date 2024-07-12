@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Auth;
+use Hash;
 use CommonLib;
+use App\Models\Users;
+use Illuminate\Http\Request;
+
 class AuthController extends Controller
 {
    public function __construct(){
-        $this->middleware('guest:web',['except'=> ['logout']]);
+        $this->middleware('guest:web',['except'=> ['logout','profile','process_change_password']]);
    }
    public function index(){
         return view('auth.login');
@@ -22,10 +25,42 @@ class AuthController extends Controller
         return view('auth.reset');
     }
 
+    public function profile(){
+        return view('auth.profile');
+    }
+
     public function process($module,Request $request){
         $mod = 'process_'.$module;
         return self::$mod($request);
     }
+
+    public  function process_change_password(Request $request){
+        $code = 300;
+        $msg  = 'Invalid current password';
+        $data = $request->validate([
+            'current_password' => 'required',
+            'password'     => 'required|min:8',
+            'confirm_password' => 'required|same:password'
+        ]);
+
+
+        $user  = Users::where('id',Auth::guard('web')->user()->id)->first();
+
+        if(Hash::check($data['current_password'], $user->password)){
+            $code = 201;
+            Users::where('id',Auth::guard('web')->user()->id)->update(
+                ['password' => Hash::make($request->password)]
+            );
+            Auth::guard('web')->logout();
+        } 
+
+        return response()->json([
+            'code'   => $code,
+            'url'    => route('auth.index'),
+            'msg'    => $msg
+        ]);
+    }
+    
 
     public static function process_login($request){
 

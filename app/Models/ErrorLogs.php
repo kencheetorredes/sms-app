@@ -26,7 +26,7 @@ class ErrorLogs extends Model
     public static function lists($key, $total = 0, $offset = 0, $limit = 10,$sort = '',$orderBy = ''){
 
         $sort_fiels  = [
-            'created_at'      => 'created_at',
+            'date'      => 'created_at',
         ]; 
 
         $sql = self::whereNotNull('created_at');
@@ -46,7 +46,7 @@ class ErrorLogs extends Model
             $sql->orderBy($sort_fiels[$sort],$orderBy);
 
         } else {
-            $sql->orderBy('id','DESC');
+            $sql->orderBy('id','asc');
         }
 
         return  $sql;       

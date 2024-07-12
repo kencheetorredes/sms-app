@@ -5,10 +5,10 @@
 <div class="modal-body">
         <div class="row"> 
             <div class="col-md-12">
-               <p><b>Date:</b> {{ date('F m,Y H:i A',strtotime($details->created_at)) }}<p>
-               <p><b>Client:</b> {{$details->client->name}}<p>
-               <p><b>Number:</b> {{$details->number}}<p>
-               <p><b>Twillio Number:</b>{{$details->mobile->mobile}}<p>
+               <p><b>Date:</b> <span class="float-end">{{ date('F m,Y H:i A',strtotime($details->created_at)) }}</span><p>
+               <p><b>Client:</b> <span class="float-end">{{$details->client->name}}</span><p>
+               <p><b>Number:</b> <span class="float-end">{{$details->number}}</span><p>
+               <p><b>Twillio Number:</b><span class="float-end">{{$details->mobile->mobile}}</span><p>
                <p><b>Message:</b><br>
                {{$details->message}}
                <p>

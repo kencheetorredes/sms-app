@@ -1,6 +1,6 @@
 <div class="sidebar-menu">
                 <div class="logo-col">
-                    <a href="/"><img style="width: 55px;" src="{{url('assets/img/logo-new.png')}}" alt="Logo"></a>
+                    <a href="/"><img style="width: 55px;" src="{{url('xassets/img/logo-new.png')}}" alt="Logo"></a>
                 </div>
                 <div class="menus-col">
                     <div class="chat-menus">
@@ -36,7 +36,7 @@
                             </li>
                             @if(CommonLib::getRole() == 0)
                             <li>
-                                <a href="{{route('setting.country_code.index')}}" class="chat-unread {{ Route::is('sms_template.*') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Country Code">
+                                <a href="{{route('setting.country_code.index')}}" class="chat-unread {{ Route::is('setting.country_code.*') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Country Code">
                                  <i class='bx bxs-flag'></i>
                                 </a>
                             </li>
@@ -58,6 +58,12 @@
                             <li>
                                 <a href="{{route('setting.logs.index')}}" class="chat-unread {{ Route::is('setting.logs.*') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Error Logs">
                                 <i class='bx bxs-error'></i>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{route('setting.bulklogs.index')}}" class="chat-unread {{ Route::is('setting.bulklogs.*') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Bulk Logs">
+                                <i class='bx bx-paper-plane'></i>
                                 </a>
                             </li>
                             @endif

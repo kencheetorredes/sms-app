@@ -55,12 +55,12 @@
                     </div><div class="slimScrollBar" style="background: rgb(204, 204, 204); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 317.4px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
                 </div>
                 <div class="chat-footer">
-                    <form>
+                    <form action="{{route('message.reply')}}" method="post">
                         <div class="replay-forms">
                             <input type="text" name="message" id="chat_msg" class="form-control chat_form" placeholder="Type your message here...">
                         </div>
                         <input type="hidden" name="client_id" value="{{$user ? $user->id : ''}}">
-                        <input type="hidden" name="twillio_no" value="{{$twillio_no}}">
+                        <input type="hidden" name="twillio_id" value="{{$twillio_id}}">
                         <div class="form-buttons">
                             <button class="btn send-btn replyBtn {{!$user ? 'disabled' : ''}}" type="submit">
                                 <i class="bx bx-paper-plane"></i>

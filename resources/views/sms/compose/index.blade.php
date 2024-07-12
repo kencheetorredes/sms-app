@@ -51,11 +51,15 @@
                         </div>
                         <div class="contact_type d-none mb-2" id="group_div">
                             <label  class="form-label">Group</label>
-                            <select name="groups" class="form-control select2"  multiple>
+                            <select name="groups[]" class="form-control select2"  multiple>
                                 @foreach ($groups as $key => $group)
                                 <option value="{{$group->id}}">{{$group->name}}</option>
                                 @endforeach
                             </select>
+                            <br><br>
+                            <label  class="form-label">Schedule</label>
+                            <input type="datetime-local" min="{{ date('Y-m-d',strtotime('-1 days')) }}" name="scheduled" class="form-control ">
+                          
                         </div>
 
                         <div class="form-group mb-2">

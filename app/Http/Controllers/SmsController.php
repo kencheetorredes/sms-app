@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use DB;
 use Bkt;
+use Auth;
+use App\BulkContacts;
 use App\Models\Groups;
 use Twilio\Rest\Client;
 use App\Models\Contacts;
 use App\Models\Messages;
 use App\Models\ErrorLogs;
 use App\Models\Templates;
+use App\Models\BulkSendings;
 use App\Models\TwilioPhones;
 use Illuminate\Http\Request;
-
+use CommonLib;
 class SmsController extends Controller
 {
     /**
@@ -57,7 +60,8 @@ class SmsController extends Controller
             'contacts' => 'required_if:type,0|array|min:1',
             'groups' => 'required_if:type,1|array|min:1',
             'message' => 'required|min:10|max:160',
-            'from_no' => 'required'
+            'from_no' => 'required',
+            'scheduled' => 'exclude_if:schedule,null'
         ],[
             'contacts.required_if' => 'Please select atleast one contact!',
             'groups.required_if' => 'Please select atleast one contact!'
@@ -68,19 +72,49 @@ class SmsController extends Controller
         $twillio = TwilioPhones::where('id',$data['from_no'])->first();
 
         $from = $twillio->mobile;
-
-        if($data['contacts']){
+        
+        if($data['type'] == 0){
             self::sendToContacts($from,$data['contacts'],$data['message'],$data['from_no']);
+            $msg = 'Message Sent';   
+        } else if($data['type'] == 1){
+            $scheduled = date('Y-m-d H:i:s',strtotime($data['scheduled']));
+            self::sendGroupContacts($data['groups'],$data['message'],$scheduled,$data['from_no']);
+            $msg = 'Messages on the way';
         }
-
+       
         return response()->json([
             'code'   => 206,
-            'msg'    => 'Message Sent',
+            'msg'    => $msg,
             'target' => 'list_table'
         ]);
 
     }
 
+    public static function sendGroupContacts($groups,$message,$schedule,$from_id){
+        foreach($groups as $group){
+            $bulk = BulkSendings::create([
+                'group_id' => $group,
+                'twillio_id' => $from_id,
+                'status' => 0,
+                'message' => $message,
+                'scheduled' => $schedule,
+                'created_by' => Auth::guard('web')->user()->id,
+                'send' => 0
+            ]);
+            $contacts = Contacts::where('group_id',$group)
+            ->where('status',1)->get();
+            $list = [];
+            foreach($contacts as $contact){
+                $list[] = [
+                    'contact_id' => $contact->id,
+                    'bulk_id' => $bulk->id
+                ];
+            }
+            $bulk->total = $contacts->count();
+            $bulk->save();
+            BulkContacts::insert( $list);
+        }
+    }
     /**
      * Send messages to contacts
      * @param contacts
@@ -92,48 +126,31 @@ class SmsController extends Controller
             $data['name'] = $recipient->name;
             $message  = Bkt::shortcode($messages,$data);
             $to = $recipient->code->code.$recipient->mobile;
-            self::sendMessage($recipient->id,$from,$to,$message,$from_id);
+            CommonLib::sendMessage($recipient->id,$from,$to,$message,$from_id);
         }
 
     }
 
-    /**
-     * Send Messages
-     */
-    public static function sendMessage($client_id,$form,$recipient,$messages,$from_id){
-        $account_sid    = getenv("TWILIO_SID");
-        $auth_token     = getenv("TWILIO_AUTH_TOKEN");
-        $twilio_number  = getenv("TWILIO_NUMBER");
-
-        try{
-            $client = new Client($account_sid, $auth_token);
-            $client->messages->create($recipient, 
-                    ['from' => $form, 'body' => $messages]);
-            Messages::create([
-                'client_id' => $client_id,
-                'number'    => $form,
-                'message'   =>  $messages,
-                'type'      => 1,
-                'twillio_no_id'  => $from_id
-            ]);
-            
-        } catch(\Exception $exception){
-            ErrorLogs::create([
-                'client_id' => $client_id,
-                'error' => $exception->getMessage(),
-                'number' => $recipient,
-                'message' => $messages,
-                'twillio_no_id' => $from_id
-            ]);
-        }
-       
-       
-    }
-
+   
     public function replyProcess(Request $request){
         $data = $request->validate([
-             'message' => 'required|min:10|max:160',
-             'client_id' => 'required'
+             'message' => 'required|min:1|max:160',
+             'client_id' => 'required',
+             'twillio_id' => 'required'
+        ]);
+
+        $twillio = TwilioPhones::where('id',$data['twillio_id'])->first();
+
+        $from = $twillio->mobile;
+        $recipient = Contacts::where('id',$data['client_id'])->first();
+        $to = $recipient->code->code.$recipient->mobile;
+      
+        CommonLib::sendMessage($data['client_id'],$from,$to,$data['message'],$data['twillio_id']);
+
+        return response()->json([
+            'code'   => 200,
+            'url'    => route('message.view',[$to,$data['client_id'],$from]) ,
+            'target' => '.chat'
         ]);
 
 
@@ -148,6 +165,7 @@ class SmsController extends Controller
     public function show($number,$client_id,$twillio_no)
     {
         $user = Contacts::where('id',$client_id)->first();
+        $twillio_id = TwilioPhones::where('mobile',$twillio_no)->pluck('id')->first();
 
         $messages = $user ? Messages::where('client_id',$client_id)->orderBy('created_at')->get() : 
         Messages::where('number',$number)->orderBy('created_at')->get();
@@ -155,7 +173,8 @@ class SmsController extends Controller
             'messages' => $messages,
             'user' => $user,
             'number' => $number,
-            'twillio_no' => $twillio_no
+            'twillio_no' => $twillio_no,
+            'twillio_id' => $twillio_id
         ]);
     }
 
