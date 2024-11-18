@@ -120,7 +120,8 @@ Route::group(['middleware' => 'auth:web'], function () {
             Route::post('/store',[UserController::class, 'store'])->name('store');
             Route::post('/update',[UserController::class, 'update'])->name('update');
         });
-
+  
+        
     });
 
 });
