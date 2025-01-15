@@ -67,6 +67,12 @@
                                 </a>
                             </li>
                             @endif
+                            <li>
+                            <a href="{{route('otp.index',CommonLib::currentTwillioNo())}}" class="chat-unread {{ Route::is('otp.index') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Otp Inbox">
+                                <i class='bx bxs-message'></i>
+
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="bottom-menus">

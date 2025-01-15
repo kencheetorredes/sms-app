@@ -29,6 +29,10 @@ return [
             1 => [
                 'label' => 'User',
                 'class' => 'text-white bg-success'
+            ],
+            2 => [
+                'label' => 'Staff',
+                'class' => 'text-white bg-success'
             ]
     ],
     'bulk_status' => [

@@ -12,7 +12,7 @@
 @endsection
 @section('content')
     <div class="container-fluid  main-bkt-div">
-    @include('sms.compose.breadcrumb')
+    @include('sms_otp.compose.breadcrumb')
     <div class="row">
         <div class="col-12 col-md-6">
             <div class="card ">

@@ -10,12 +10,16 @@ use App\Models\Groups;
 use Twilio\Rest\Client;
 use App\Models\Contacts;
 use App\Models\Messages;
+use App\Models\OtpMessages;
 use App\Models\ErrorLogs;
 use App\Models\Templates;
 use App\Models\BulkSendings;
 use App\Models\TwilioPhones;
+use App\Models\CountryCodes;
 use Illuminate\Http\Request;
 use CommonLib;
+use Twilio\TwiML\MessagingResponse;
+
 class SmsController extends Controller
 {
     /**
@@ -193,6 +197,51 @@ class SmsController extends Controller
             'twilio_number' => $twilio_number
         ]);
     }
-
     
+    public function handleInboundSms(Request $request)
+    {
+        
+        $data = ([
+            'to' => $request->input('To'),
+            'from' => $request->input('From'),
+            'message' => $request->input('Body'),
+        ]);
+
+        \Log::info("Received SMS from {$data['from']}: {$data['message']}");
+
+        $countryCodes = CountryCodes::all();
+        $fromNumber = $data['from']; 
+      
+        foreach ($countryCodes as $code) {
+            $fromNumber = str_replace('' . $code->code, '', $fromNumber);
+        }
+     
+        $twillio_from = Contacts::where('mobile', str_replace(' ', '',$fromNumber))->first();
+        $twillio_to = TwilioPhones::where('mobile', str_replace(' ', '',$data['to']))->first();
+
+        $otpPattern = '/\b\d+\b/';
+
+        if (empty($twillio_from) && preg_match($otpPattern, $data['message'])){
+            $twillio_to_new = TwilioPhones::where('mobile', str_replace(' ', '',$data['to']))->first();
+            OtpMessages::create([
+                'number'         => str_replace(' ', '',$data['from']),  
+                'message'        => $data['message'],  
+                'twillio_no_id'  => $twillio_to_new['id'],
+                'type'           => 1,
+            ]);
+            // echo "sms otp";
+        }
+        else
+        {
+            Messages::create([
+                'number'         => $data['from'],  
+                'message'        => $data['message'],  
+                'twillio_no_id'  => $twillio_to['id'],
+                'client_id'      => $twillio_from['id'], 
+                'type'           => 1,
+            ]);
+            // echo "sms client";
+        }
+
+    }    
 }

@@ -12,6 +12,7 @@ use App\Http\Controllers\Setting\UserController;
 use App\Http\Controllers\Setting\BulkLogController;
 use App\Http\Controllers\Setting\TwillioController;
 use App\Http\Controllers\Setting\CountryCodeController;
+use App\Http\Controllers\SmsOtp;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,13 @@ Route::group(['middleware' => 'auth:web'], function () {
         Route::get('/view/{number}/{client_id}/{twillio_no}',[SmsController::class,'show'])->name('view');
         Route::post('/reply',[SmsController::class,'replyProcess'])->name('reply');
         Route::post('/send',[SmsController::class,'send'])->name('send');
+    });
+
+    Route::name('otp.')->prefix('/otp')->group(function(){
+        Route::get('/inbox/{twillio_no}',[SmsOtp::class,'index'])->name('index');
+        Route::get('/lists/{twilliono}',[SmsOtp::class,'lists'])->name('lists');
+        Route::get('/view/{number}/{twillio_no}',[SmsOtp::class,'show'])->name('view');
+        // Route::get('/lists',[SmsOtp::class,'lists'])->name('lists');
     });
 
     Route::name('sms_template.')->prefix('/sms-template')->group(function(){
@@ -121,7 +129,8 @@ Route::group(['middleware' => 'auth:web'], function () {
             Route::post('/update',[UserController::class, 'update'])->name('update');
         });
   
-        
     });
 
+
 });
+Route::post('/handle-incoming-sms', [SmsController::class, 'handleInboundSms'])->name('handleInboundSms'); 

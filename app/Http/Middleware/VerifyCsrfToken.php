@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        'handle-incoming-sms',  // Add your webhook URL here
     ];
 }
