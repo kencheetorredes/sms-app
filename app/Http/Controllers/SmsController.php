@@ -237,7 +237,7 @@ class SmsController extends Controller
                 'number'         => $data['from'],  
                 'message'        => $data['message'],  
                 'twillio_no_id'  => $twillio_to['id'],
-                'client_id'      => $twillio_from['id'], 
+                'client_id'      => empty($twillio_from) ? 0 : $twillio_from['id'], 
                 'type'           => 1,
             ]);
             // echo "sms client";
