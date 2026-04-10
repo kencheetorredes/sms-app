@@ -7,7 +7,7 @@
                         <ul>
 
                             <li>
-                                <a href="{{route('message.index',CommonLib::currentTwillioNo())}}" class="chat-unread {{ Route::is('dashboard.index') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Dashboard">
+                                <a href="{{route('dashboard.index')}}" class="chat-unread {{ Route::is('dashboard.index') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Dashboard">
                                     <i class="bx bxs-dashboard"></i>
                                 </a>
                             </li>

@@ -73,7 +73,7 @@ class AuthController extends Controller
 
         if(Auth::attempt($credential)){
             $user = Auth::guard('web')->user()->id;
-            return redirect(route('message.index',CommonLib::currentTwillioNo()));
+            return redirect(route('dashboard.index',CommonLib::currentTwillioNo()));
         } else {
             return redirect(route('auth.index'))->with('error', 'invalid email or password');
         } 

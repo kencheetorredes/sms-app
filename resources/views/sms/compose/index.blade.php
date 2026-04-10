@@ -82,6 +82,32 @@
                 </div>
             </div>
         </div>
+        
+        <!-- preview -->
+
+        <div class="col-lg-5">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-4">
+
+                    <h5 class="fw-semibold mb-3">SMS Preview</h5>
+
+                    <div class="bg-dark text-white p-3 rounded-4" style="min-height: 200px;">
+                        <p id="previewText" class="mb-0">
+                            Your message will appear here...
+                        </p>
+                    </div>
+
+                    <div class="mt-3">
+                        <small class="text-muted">
+                            Preview simulates how your SMS will look on a phone.
+                        </small>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+
     </div>
    </div>
 @endsection
