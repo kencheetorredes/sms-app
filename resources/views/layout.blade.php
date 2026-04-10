@@ -7,7 +7,7 @@
     <meta name="author" content="kenchee torredes">
     <meta name="robots" content="noindex,nofollow" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-	<title>HIRAS SMS</title>
+	<title>SMS</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{url('assets/img/logo-new.png')}}">
@@ -47,7 +47,6 @@
 	
         <!-- content -->
         <div class="content main_content">
-
             <!-- Left Sidebar Menu -->
             @include('common.side')
             <!-- /Left Sidebar Menu -->

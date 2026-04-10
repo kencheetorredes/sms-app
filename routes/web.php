@@ -1,17 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SmsController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\CSVTemplateController;
-use App\Http\Controllers\Setting\LogController;
-use App\Http\Controllers\Setting\UserController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\Setting\BulkLogController;
-use App\Http\Controllers\Setting\TwillioController;
 use App\Http\Controllers\Setting\CountryCodeController;
+use App\Http\Controllers\Setting\LogController;
+use App\Http\Controllers\Setting\TwillioController;
+use App\Http\Controllers\Setting\UserController;
+use App\Http\Controllers\SmsController;
+use App\Http\Controllers\TemplateController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,10 @@ Route::name('auth.')->prefix('/')->group(function(){
 });
 
 Route::group(['middleware' => 'auth:web'], function () {
+
+     Route::name('dashboard.')->prefix('/dashboard')->group(function(){
+        Route::get('/',[DashboardController::class,'index'])->name('index');
+    });
 
     Route::name('auth.')->prefix('/auth')->group(function(){
         Route::get('/logout',[AuthController::class,'logout'])->name('logout');
