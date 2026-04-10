@@ -1,10 +1,18 @@
 <div class="sidebar-menu">
                 <div class="logo-col">
-                    <a href="/"><img style="width: 55px;" src="{{url('assets/img/logo-new.png')}}" alt="Logo"></a>
+                    <a href="/"><img style="width: 55px;" src="{{url('assets/img/icon-logo.png')}}" alt="Logo"></a>
                 </div>
                 <div class="menus-col">
                     <div class="chat-menus">
                         <ul>
+
+                            <li>
+                                <a href="{{route('message.index',CommonLib::currentTwillioNo())}}" class="chat-unread {{ Route::is('dashboard.index') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Dashboard">
+                                    <i class="bx bxs-dashboard"></i>
+                                </a>
+                            </li>
+
+
                             <li>
                                 <a href="{{route('message.index',CommonLib::currentTwillioNo())}}" class="chat-unread {{ Route::is('message.index') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Inbox">
                                     <i class="bx bxs-inbox"></i>

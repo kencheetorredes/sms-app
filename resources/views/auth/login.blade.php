@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
-	<title>Hiras SMS</title>
+	<title>Line SMS</title>
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/x-icon" href="{{url('assets/img/logo-new.png')}}">
+	<link rel="shortcut icon" type="image/x-icon" href="{{url('assets/img/icon-logo.png')}}">
 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="{{url('admin/assets/css/bootstrap.min.css')}}">
@@ -33,7 +33,7 @@
             <div class="login-wrapper">
                 <header class="logo-header">
                     <a href="/" class="logo-brand">
-                        <img src="{{url('assets/img/logo-new.png')}}" alt="Logo" class="img-fluid logo-dark">
+                        <img src="{{url('assets/img/icon-logo.png')}}" alt="Logo" class="img-fluid logo-dark">
                     </a>
                 </header>
                 <div class="login-inbox admin-login">

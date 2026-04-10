@@ -10,7 +10,7 @@
 	<title>SMS</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="{{url('assets/img/logo-new.png')}}">
+    <link rel="icon" href="{{url('assets/img/icon-logo.png')}}">
 	
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{url('assets/css/bootstrap.min.css')}}">
