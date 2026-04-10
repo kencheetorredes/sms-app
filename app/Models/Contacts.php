@@ -32,10 +32,12 @@ class Contacts extends Model
 
     $sql = self::whereNotNull('created_at');
 
-    if( isset($search['key']) && $search['key'] != NULL ){
+
+    if( isset($search['search']) && $search['search'] != NULL ){
+
         $sql->where(function($searchlist) use ($search) {
-            return  $searchlist->where('name','like','%'.$search['key'].'%')
-            ->orWhere('mobile','like','%'.$search['key'].'%');
+            return  $searchlist->where('name','like','%'.$search['search'].'%')
+            ->orWhere('mobile','like','%'.$search['search'].'%');
         });
     }
 

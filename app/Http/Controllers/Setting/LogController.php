@@ -25,13 +25,14 @@ class LogController extends Controller
      */
     public function lists(Request $request)
     {
+        
         $limit       = $request->input('limit');
         $offset      = $request->input('offset');
         $search      = $request->input('search');
 
         $sort        = $request->sort;
         $orderBy     = $request->order;
-        $results     = ErrorLogs::lists($search, 1, $offset, $limit,$sort,$orderBy)->get();
+        $results     = ErrorLogs::lists($search, 1, $offset, $limit,$sort,$orderBy)->orderBy('created_at','desc')->get();
 
         foreach($results as $result){
             $result->date = date('F m,Y H:i A',strtotime($result->created_at));

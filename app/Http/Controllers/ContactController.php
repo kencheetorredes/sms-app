@@ -76,7 +76,7 @@ class ContactController extends Controller
             'details' =>  Contacts::where('id',$id)->first(),
             'dom'     => $request->dom
        ]);
-    }
+    } 
 
     /**
      * Store a newly created resource in storage.

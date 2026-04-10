@@ -12,7 +12,8 @@
                                 </ul>
                             </div>
                             <div class="mt-1">
-                                <h5>{{$user ? $user->name : $number }}<br><br></h5>
+                                <h5>{{$user ? $user->name : $number }}<br>
+                                {{$user ? $user->mobile : '' }}<small></h5>
                             </div>
                         </div>
                         <div class="chat-options ">

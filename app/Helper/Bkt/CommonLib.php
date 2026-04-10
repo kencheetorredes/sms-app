@@ -19,14 +19,18 @@ class CommonLib {
         $auth_token     = getenv("TWILIO_AUTH_TOKEN");
         $twilio_number  = getenv("TWILIO_NUMBER");
 
+        $channel = '';//'whatsapp:';
+        
         try{
             $client = new Client($account_sid, $auth_token);
-            $client->messages->create($recipient, 
-                    ['from' => $from, 'body' => $messages]);
+            
+            $client->messages->create($channel.$recipient, 
+                    ['from' => $channel.$from, 'body' => $messages]);
+                    
             Messages::create([
                 'client_id' => $client_id,
                 'number'    => $from,
-                'message'   =>  $messages,
+                'message'   => $messages,
                 'type'      => 1,
                 'twillio_no_id'  => $from_id,
                 'created_by' => $created_by == '' ? Auth::guard('web')->user()->id : $created_by

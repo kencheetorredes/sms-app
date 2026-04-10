@@ -1,6 +1,6 @@
 <div class="sidebar-menu">
                 <div class="logo-col">
-                    <a href="/"><img style="width: 55px;" src="{{url('xassets/img/logo-new.png')}}" alt="Logo"></a>
+                    <a href="/"><img style="width: 55px;" src="{{url('assets/img/logo-new.png')}}" alt="Logo"></a>
                 </div>
                 <div class="menus-col">
                     <div class="chat-menus">

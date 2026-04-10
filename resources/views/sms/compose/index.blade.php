@@ -45,7 +45,7 @@
                             <button class="btn btn-sm btn-primary float-end mb-2 pop-up" data-template="{{route('contacts.create')}}?dom=1">+</button>
                             <select name="contacts[]" id="contact_id" class="form-control select2"  multiple="multiple">
                                 @foreach ($contacts as $key => $contact)
-                                <option value="{{$contact->id}}">{{$contact->name}}</option>
+                                <option value="{{$contact->id}}">{{$contact->name}}({{ $contact->mobile}})</option>
                                 @endforeach
                             </select>
                         </div>
