@@ -9,7 +9,14 @@ use Illuminate\Http\Request;
 class SmsGatewayController extends Controller
 {
     public function index(){
-        return view('setting.gateway.index');
+        $details = SmsGateways::where('id', 1)->first();
+        return view('setting.gateway.index', [
+            'details' => $details,
+            'gateways' => [
+                1 => 'Semaphore',
+                2 => 'Twilio'
+            ]
+        ]);
     }
 
     public function process(Request $request){

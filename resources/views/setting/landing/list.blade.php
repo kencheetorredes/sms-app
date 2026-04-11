@@ -28,7 +28,7 @@
                      <a href="#" class="seeMessages" data-target=".chat" data-url="{{route('setting.gateway.index')}}">
                             <div class="users-list-body">
                                 <div>
-                                    <h5>Gateway</h5>
+                                    <h5><i class="fas fa-globe  text-primary"></i> Gateway</h5>
                                     <p class="text-muted">Setup SMS gateway</p>
                                 </div>  
                         </div>
@@ -37,7 +37,7 @@
                      <a href="#" class="seeMessages" data-target=".chat" data-url="{{route('setting.country_code.index')}}">
                         <div class="users-list-body">
                             <div>
-                                <h5>Country Code</h5>
+                                <h5><i class="fas fa-mobile-alt  text-primary"></i> Country Code</h5>
                                  <p class="text-muted">Manage mobile country code</p>
                             </div> 
                         </div>
@@ -46,7 +46,7 @@
                     <a href="#" class="seeMessages" data-target=".chat" data-url="{{route('setting.twillio.index')}}">
                         <div class="users-list-body">
                             <div>
-                                <h5>Twillio Number</h5>
+                                <h5><i class="fas fa-phone  text-primary"></i> Twillio Number</h5>
                                 <p class="text-muted">Manage twillio number </p>
                             </div> 
                         </div>
@@ -55,7 +55,7 @@
                     <a href="#" class="seeMessages" data-target=".chat" data-url="{{route('setting.users.index')}}">
                         <div class="users-list-body">
                             <div>
-                                <h5>Users</h5>
+                                <h5><i class="fas fa-users  text-primary"></i> Users</h5>
                                 <p class="text-muted">Manage all users</p>
                             </div> 
                         </div>
@@ -64,7 +64,7 @@
                     <a href="#" class="seeMessages" data-target=".chat" data-url="{{route('setting.logs.index')}}">
                         <div class="users-list-body">
                             <div>
-                                <h5>Error Logs</h5>
+                                <h5><i class="fas fa-exclamation-triangle  text-primary"></i> Error Logs</h5>
                                 <p class="text-muted">View sending logs</p>
                             </div> 
                         </div>
@@ -73,7 +73,7 @@
                     <a href="#" class="seeMessages" data-target=".chat" data-url="{{route('setting.bulklogs.index')}}">
                         <div class="users-list-body">
                             <div>
-                                <h5>Bulk Error Logs</h5>
+                                <h5><i class="fas fa-exclamation-triangle text-primary"></i> Bulk Error Logs</h5>
                                 <p class="text-muted">View Bulk error sending logs</p>
                             </div> 
                         </div>

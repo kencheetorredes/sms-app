@@ -9,42 +9,45 @@
             <div class="mb-4">
                 <label class="form-label">Select SMS Gateway</label>
                 <select class="form-select" id="gatewaySelect" name="sms_gateway">
-                    <option value="1">Semaphore (PH)</option>
-                    <option value="2">Twilio</option>
+                    @foreach($gateways as $key => $gateway)
+                        <option value="{{ $key }}" {{ (isset($details->sms_gateway) && $details->sms_gateway == $key) ? 'selected' : '' }}>
+                            {{ $gateway }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
 
             <!-- 🔵 TWILIO SETTINGS -->
-            <div id="twilioFields" style="display:none;">
+            <div id="twilioFields" @if(isset($details->sms_gateway) && $details->sms_gateway != 2) style="display:none;" @endif>
 
                 <h6 class="fw-semibold mb-3">Twilio Configuration</h6>
 
                 <div class="mb-3">
                     <label class="form-label">Account SID</label>
-                    <input type="text" class="form-control" name="twilio_sid">
+                    <input type="text" class="form-control" name="twilio_sid" value="{{ old('twilio_sid', $details->twilio_sid ?? '') }}">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Auth Token</label>
-                    <input type="text" class="form-control" name="twilio_token">
+                    <input type="text" class="form-control" name="twilio_token" value="{{ old('twilio_token', $details->twilio_token ?? '') }}">
                 </div>
 
 
             </div>
 
             <!-- 🟢 SEMAPHORE SETTINGS -->
-            <div id="semaphoreFields" >
+            <div id="semaphoreFields" @if(isset($details->sms_gateway) && $details->sms_gateway != 1) style="display:none;" @endif>
 
                 <h6 class="fw-semibold mb-3">Semaphore Configuration</h6>
 
                 <div class="mb-3">
                     <label class="form-label">API Key</label>
-                    <input type="text" class="form-control" name="semaphore_api_key">
+                    <input type="text" class="form-control" name="semaphore_api_key" value="{{ old('semaphore_api_key', $details->semaphore_api_key ?? '') }}">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Sender Name</label>
-                    <input type="text" class="form-control" name="semaphore_sender">
+                    <input type="text" class="form-control" name="semaphore_sender" value="{{ old('semaphore_sender', $details->semaphore_sender ?? '') }}">
                 </div>
 
             </div>
