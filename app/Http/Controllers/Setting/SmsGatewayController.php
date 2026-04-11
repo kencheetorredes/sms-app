@@ -25,7 +25,6 @@ class SmsGatewayController extends Controller
             'twilio_sid' => 'required_if:sms_gateway,2',
             'twilio_token' => 'required_if:sms_gateway,2',
             'semaphore_api_key' => 'required_if:sms_gateway,1',
-            'semaphore_sender' => 'required_if:sms_gateway,1'
         ]);
 
         $verify = SmsGateways::where('id', 1)->first();

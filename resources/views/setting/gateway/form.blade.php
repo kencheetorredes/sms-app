@@ -45,11 +45,6 @@
                     <input type="text" class="form-control" name="semaphore_api_key" value="{{ old('semaphore_api_key', $details->semaphore_api_key ?? '') }}">
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Sender Name</label>
-                    <input type="text" class="form-control" name="semaphore_sender" value="{{ old('semaphore_sender', $details->semaphore_sender ?? '') }}">
-                </div>
-
             </div>
 
             </form>

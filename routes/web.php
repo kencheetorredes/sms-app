@@ -8,6 +8,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\Setting\BulkLogController;
 use App\Http\Controllers\Setting\CountryCodeController;
 use App\Http\Controllers\Setting\LogController;
+use App\Http\Controllers\Setting\SenderNameController;
 use App\Http\Controllers\Setting\SmsGatewayController;
 use App\Http\Controllers\Setting\TwillioController;
 use App\Http\Controllers\Setting\UserController;
@@ -115,6 +116,14 @@ Route::group(['middleware' => 'auth:web'], function () {
             Route::get('/form/{id?}',[CountryCodeController::class,'create'])->name('create');
             Route::post('/store',[CountryCodeController::class, 'store'])->name('store');
             Route::post('/update',[CountryCodeController::class, 'update'])->name('update');
+        });
+
+         Route::name('semaphore_sender_name.')->prefix('/semaphore-sender-name')->group(function(){
+            Route::get('/',[SenderNameController::class,'index'])->name('index');
+            Route::get('/lists',[SenderNameController::class,'lists'])->name('lists');
+            Route::get('/form/{id?}',[SenderNameController::class,'create'])->name('create');
+            Route::post('/store',[SenderNameController::class, 'store'])->name('store');
+            Route::post('/update',[SenderNameController::class, 'update'])->name('update');
         });
 
         Route::name('twillio.')->prefix('/twillio_no')->group(function(){

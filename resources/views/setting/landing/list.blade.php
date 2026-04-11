@@ -51,6 +51,17 @@
                             </div> 
                         </div>
                     </a>
+                    @else
+
+                     <a href="#" class="seeMessages" data-target=".chat" data-url="{{route('setting.semaphore_sender_name.index')}}">
+                        <div class="users-list-body">
+                            <div>
+                                <h5><i class="fas fa-phone  text-primary"></i> Sender Name</h5>
+                                <p class="text-muted">Manage sender name (Semaphore)</p>
+                            </div> 
+                        </div>
+                    </a>
+
                     @endif
                     <a href="#" class="seeMessages" data-target=".chat" data-url="{{route('setting.users.index')}}">
                         <div class="users-list-body">
