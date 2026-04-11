@@ -85,6 +85,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $data = $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users,email',
@@ -100,20 +101,18 @@ class UserController extends Controller
         $data['password'] = Hash::make($password);
         $user = Users::create($data);
 
-        if(isset($request->mobiles)){
-            foreach($request->mobiles as $mobile){
-                UserNumbers::create([
-                    'user_id' => $user->id,
-                    'twillio_nunber' => $mobile
-                ]);
-            }
-        }
-
-         if(isset($request->sender_names)){
+        if($request->gateway == 1){
             foreach($request->sender_names as $sender_name){
                 UserSenderNames::create([
                     'user_id' => $user->id,
                     'sender_name_id' => $sender_name
+                ]);
+            }
+        } else {
+            foreach($request->mobiles as $mobile){
+                UserNumbers::create([
+                    'user_id' => $user->id,
+                    'twillio_nunber' => $mobile
                 ]);
             }
         }
@@ -150,7 +149,8 @@ class UserController extends Controller
          $data = $request->validate([
             'name'      => 'required',
             'email'     => 'required|unique:users,email,'.$request->id,
-            'mobiles'   => 'required|array|min:1',
+            'mobiles' => 'required_if:gateway,2|array|min:1',
+            'sender_names' => 'required_if:gateway,1|array|min:1',
             'role'      => 'required',
             'status'    => 'required',
             'password'  => 'exclude_if:password,null|min:8'
@@ -159,14 +159,25 @@ class UserController extends Controller
         if(isset($data['password'])){
             $data['password'] = Hash::make($data['password']);
         } 
-        unset($data['mobiles']);
-        UserNumbers::where('user_id',$request->id)->delete();
-
-        foreach($request->mobiles as $mobile){
-            UserNumbers::create([
-                'user_id' => $request->id,
-                'twillio_nunber' => $mobile
-            ]);
+        
+        if($request->gateway == 1){
+            unset($data['sender_names']);
+            UserSenderNames::where('user_id',$request->id)->delete();
+            foreach($request->sender_names as $sender_name){
+                UserSenderNames::create([
+                    'user_id' => $request->id,
+                    'sender_name_id' => $sender_name
+                ]);
+            }
+        } else {
+            unset($data['mobiles']);
+            UserNumbers::where('user_id',$request->id)->delete();
+            foreach($request->mobiles as $mobile){
+                UserNumbers::create([
+                    'user_id' => $request->id,
+                    'twillio_nunber' => $mobile
+                ]);
+            }
         }
 
         Users::where('id',$request->id)->update($data);
