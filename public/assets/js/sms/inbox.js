@@ -1,5 +1,5 @@
 
-$(document).on('click', '.seeMessages',function(e) {
+$(document).on('click', '.seeMessages',function(e) { 
     var $this = $(this),
         target = $this.data('target'),
         url = $this.data('url');

@@ -16,7 +16,17 @@
                                 <small></h5>
                             </div>
                         </div>
-                        
+                          <div class="chat-options ">
+                            <ul class="list-inline">
+                                
+                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="New">
+                                    <a href="javascript:void(0)" class="btn btn-outline-light  pop-up" data-template="{{route('setting.twillio.create')}}">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
                     </div>
                     <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%; height: 596px;">
                         <div class="chat-body chat-page-group slimscroll" style="overflow: hidden; width: 100%; height: 790px;">
@@ -36,4 +46,6 @@
                     <div class="slimScrollBar" style="background: rgb(204, 204, 204); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 317.4px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
                 </div>
                 
-           
+             <script>
+            $('table').bootstrapTable();
+            </script>

@@ -16,24 +16,40 @@
                                 <small></h5>
                             </div>
                         </div>
+
+
+                         <div class="chat-options ">
+                            <ul class="list-inline">
+                                
+                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="New">
+                                    <a href="javascript:void(0)" class="btn btn-outline-light  pop-up" data-template="{{route('setting.country_code.create')}}">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
                         
                     </div>
                     <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%; height: 596px;">
                         <div class="chat-body chat-page-group slimscroll" style="overflow: hidden; width: 100%; height: 790px;">
                         <div class="messages">
-                           <table class="table" id="list_table" data-ispopup="true" data-sort-name="country" data-sort-order="asc" data-explode="action" data-search="true"  data-target="{{route('setting.country_code.create')}}" data-row="id" data-toolbar="#toolbar"
-                                data-toggle="table" data-url="{{route('setting.country_code.lists')}}"  data-side-pagination="server" data-pagination="true" data-page-list="[5, 10, 20, 50, 100, 200,500,1000]"  >
-                                <thead  class="alert alert-light solid alert-square solid bordered">
-                                    <tr>
-                                        <th data-field="country">Country</th>
-                                        <th data-field="country_short_name">Code</th>
-                                        <th data-field="code">Mobile Code</th>
-                                    </tr>
-                                </thead>
-                            </table>
+                                            <table class="table" id="list_table" data-ispopup="true" data-sort-name="country" data-sort-order="asc" data-explode="action" data-search="true"  data-target="{{route('setting.country_code.create')}}" data-row="id" data-toolbar="#toolbar"
+                                                data-toggle="table" data-url="{{route('setting.country_code.lists')}}"  data-side-pagination="server" data-pagination="true" data-page-list="[5, 10, 20, 50, 100, 200,500,1000]"  >
+                                                <thead  class="alert alert-light solid alert-square solid bordered">
+                                                    <tr>
+                                                        <th data-field="country">Country</th>
+                                                        <th data-field="country_short_name">Code</th>
+                                                        <th data-field="code">Mobile Code</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                      
                         </div>
                     </div>
                     <div class="slimScrollBar" style="background: rgb(204, 204, 204); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 317.4px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
                 </div>
                 
-           
+           <script>
+            $('table').bootstrapTable();
+            </script>
