@@ -13,7 +13,7 @@
                             </div>
                             <div class="mt-1">
                                 <h5 class="pb-1 pt-1">Twillio Number<br>
-                                <small>Manage your Twillio phone numbers</small>
+                                <small class="text-muted">Manage your Twillio phone numbers</small>
                                 </h5>
                             </div>
                         </div>

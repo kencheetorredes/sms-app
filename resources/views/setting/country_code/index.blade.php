@@ -13,7 +13,7 @@
                             </div>
                             <div class="mt-1">
                                 <h5 class="pb-1 pt-1">Mobile Country Code<br>
-                                <small>Manage your mobile country codes ( Twillio )</small>
+                                <small class="text-muted">Manage your mobile country codes ( Twillio )</small>
                                 </h5>
                             </div>
                         </div>

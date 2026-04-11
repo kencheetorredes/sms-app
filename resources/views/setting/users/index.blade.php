@@ -12,8 +12,8 @@
                                 </ul>
                             </div>
                             <div class="mt-1">
-                                <h5 class="pb-3 pt-2">Users<br>
-                                <small>Manage your users</small>
+                                <h5 class="pb-1 pt-1">Users<br>
+                                <small class="text-muted">Manage your users</small>
                                 </h5>
                             </div>
                         </div>
