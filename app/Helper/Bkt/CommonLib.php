@@ -8,6 +8,7 @@ use App\Models\Messages;
 use App\Models\SettingUserRoles;
 use App\Models\SmsGateways;
 use App\Models\UserNumbers;
+use App\Models\UserSenderNames;
 use Auth;
 use Twilio\Rest\Client;
 
@@ -64,8 +65,17 @@ class CommonLib {
         return  $field == '' ? $userNumbers->number->mobile : $userNumbers->number->id;
     }
 
+    public static function currentSenderName($field = ''){
+        $userSenderNames = UserSenderNames::where('user_id',Auth::guard('web')->user()->id)->first();
+        return  $field == '' ? $userSenderNames->details->sender_name : $userSenderNames->sender_name_id;
+    }
+
     public static function usertNumbers(){
         return UserNumbers::where('user_id',Auth::guard('web')->user()->id)->get();
+    }
+
+     public static function userSenderNames(){
+        return UserSenderNames::where('user_id',Auth::guard('web')->user()->id)->get();
     }
 
 

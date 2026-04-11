@@ -1,3 +1,4 @@
+@php $gateway = CommonLib::get_gateway() == 1 ? 'semaphore' : 'twillio'; @endphp
 @extends('layout')
 @section('css')
 <style>
@@ -18,19 +19,7 @@
             <div class="card ">
                 <div class="card-body p-1">
                     <form action="{{route('message.send')}}" method="post" id="btk-form">
-                        @if(count(CommonLib::usertNumbers()) > 0)
-                        <div class="mb-2">
-                            <label for="name" class="form-label">From</label>
-                            <select name="from_no"  class="form-control select2 changeType">
-                                <option value=""></option>
-                                @foreach (CommonLib::usertNumbers() as $key => $usertNumber)
-                                <option value="{{$usertNumber->twillio_nunber}}">{{$usertNumber->number->mobile}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        @else
-                        <input type="hidden" name="from_no" value="{{CommonLib::currentTwillioNo(1)}}">
-                        @endif
+                        @include('sms.compose.from.'.$gateway)
                         <div class="mb-2">
                             <label for="name" class="form-label">Message Type</label>
                             <select name="type"  class="form-control select2 changeType">
@@ -72,9 +61,15 @@
                             </select>
                         </div>
 
+                        <input type="hidden" name="gateway" value="{{ CommonLib::get_gateway()}}">
+
                         <div class="form-group mb-2">
                             <label class="form-label">Message</label>
                             <textarea name="message" id="messages" rows="10" class="form-control"></textarea>
+                             <div class="d-flex justify-content-between mt-2">
+                            <small class="text-muted">160 characters = 1 SMS</small>
+                            <small id="charCount" class="text-muted">0 / 160</small>
+                        </div>
                         </div>
 
                         <button class="btn btn-primary float-end cuBtn"  data-form="btk-form">Send</button>

@@ -15,6 +15,19 @@ $(document).on('change', '.getTemplate',function(e) {
     var res = DataHadler('', 'post', url, {"id":""+id+"","action":"getTemplateContent"});
     res.done(function (response, textStatus, jqXHR) {
         $(''+target+'').val(response);
+        $(''+target+'').trigger('keyup');
         killLoading();
     })
 });
+
+
+
+$(document).on('keyup', '#messages',function(e) {
+    let previewText = $('#previewText');
+    let charCount = $('#charCount');
+     let text = $(this).val();
+      previewText.text(text || "Your message will appear here...");
+    charCount.text(text.length + " / 160");
+
+});
+

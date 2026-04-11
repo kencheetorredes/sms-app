@@ -13,7 +13,7 @@ class UserSenderNames extends Model
         'sender_name_id'
     ];
 
-     public function sender_name(){
-        return $this->belongsTo(SemaphoreSenderNames::class,'sender_name_id','id');
+    public  function details(){
+        return $this->hasOne(SemaphoreSenderNames::class,'id','sender_name_id');
     }
 }
