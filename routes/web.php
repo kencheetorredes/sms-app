@@ -8,8 +8,10 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\Setting\BulkLogController;
 use App\Http\Controllers\Setting\CountryCodeController;
 use App\Http\Controllers\Setting\LogController;
+use App\Http\Controllers\Setting\SmsGatewayController;
 use App\Http\Controllers\Setting\TwillioController;
 use App\Http\Controllers\Setting\UserController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SmsController;
 use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +38,7 @@ Route::group(['middleware' => 'auth:web'], function () {
      Route::name('dashboard.')->prefix('/dashboard')->group(function(){
         Route::get('/',[DashboardController::class,'index'])->name('index');
     });
+
 
     Route::name('auth.')->prefix('/auth')->group(function(){
         Route::get('/logout',[AuthController::class,'logout'])->name('logout');
@@ -85,9 +88,8 @@ Route::group(['middleware' => 'auth:web'], function () {
 
     Route::name('setting.')->prefix('/setting')->group(function(){
         
-        Route::get('/',function(){
-            return view('setting.landing.index');
-        })->name('index');
+        Route::get('/',[SettingController::class,'index'])->name('index');
+
         Route::get('/csv-template/{module}',[CSVTemplateController::class,'index'])->name('csv-template');
         
         Route::name('logs.')->prefix('/logs')->group(function(){
@@ -100,6 +102,11 @@ Route::group(['middleware' => 'auth:web'], function () {
             Route::get('/',[BulkLogController::class,'index'])->name('index');
             Route::get('/lists',[BulkLogController::class,'lists'])->name('lists');
             Route::get('/details/{id?}',[BulkLogController::class,'show'])->name('show');
+        });
+
+         Route::name('gateway.')->prefix('gateway')->group(function(){
+            Route::get('/',[SmsGatewayController::class,'index'])->name('index');
+            Route::post('/process',[SmsGatewayController::class,'process'])->name('process'); 
         });
 
         Route::name('country_code.')->prefix('/country_code')->group(function(){

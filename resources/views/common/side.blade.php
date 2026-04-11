@@ -43,7 +43,15 @@
                                 </a>
                             </li>
                             @if(CommonLib::getRole() == 0)
+
                             <li>
+                                <a href="{{route('setting.index')}}" class="chat-unread {{ Route::is('setting.*') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Settings">
+                                 <i class='bx bxs-cog'></i>
+                                </a>
+                            </li>
+
+
+                            <!-- <li>
                                 <a href="{{route('setting.country_code.index')}}" class="chat-unread {{ Route::is('setting.country_code.*') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Country Code">
                                  <i class='bx bxs-flag'></i>
                                 </a>
@@ -73,7 +81,7 @@
                                 <a href="{{route('setting.bulklogs.index')}}" class="chat-unread {{ Route::is('setting.bulklogs.*') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Bulk Logs">
                                 <i class='bx bx-paper-plane'></i>
                                 </a>
-                            </li>
+                            </li> -->
                             @endif
                         </ul>
                     </div>
