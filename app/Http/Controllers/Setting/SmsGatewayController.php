@@ -29,7 +29,7 @@ class SmsGatewayController extends Controller
         }
 
          return response()->json([
-            'code'   => 206,
+            'code'   => 207,
             'msg'    => 'SMS gateway has been saved',
             'target' => 'list_table'
         ]);

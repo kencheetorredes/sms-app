@@ -140,6 +140,9 @@ $(function () {
                                 }).then(($result) => {
                                     window.location.reload()
                                 }); 
+                            } else if(response.code == 207){
+                               form.prepend(successDiv.replace('success-mg',response.msg ));
+                               kill_alert(); 
                             }
                             
                         }
