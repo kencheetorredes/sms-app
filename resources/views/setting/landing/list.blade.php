@@ -33,8 +33,8 @@
                                 </div>  
                         </div>
                     </a>
-                    @if(CommonLib::get_gateway() == 2)
-                     <a href="#" class="seeMessages" data-target=".chat" data-url="{{route('setting.country_code.index')}}">
+                  
+                     <a href="#" class="seeMessages api_control twillio_control {{ CommonLib::get_gateway() == 2 ? 'd-block' : 'd-none' }}" data-target=".chat" data-url="{{route('setting.country_code.index')}}">
                         <div class="users-list-body">
                             <div>
                                 <h5><i class="fas fa-mobile-alt  text-primary"></i> Country Code</h5>
@@ -43,7 +43,7 @@
                         </div>
                     </a>
 
-                    <a href="#" class="seeMessages" data-target=".chat" data-url="{{route('setting.twillio.index')}}">
+                    <a href="#" class="seeMessages api_control twillio_control {{ CommonLib::get_gateway() == 2 ? 'd-block' : 'd-none' }}" data-target=".chat" data-url="{{route('setting.twillio.index')}}">
                         <div class="users-list-body">
                             <div>
                                 <h5><i class="fas fa-phone  text-primary"></i> Twillio Number</h5>
@@ -51,9 +51,9 @@
                             </div> 
                         </div>
                     </a>
-                    @else
+                    
 
-                     <a href="#" class="seeMessages" data-target=".chat" data-url="{{route('setting.semaphore_sender_name.index')}}">
+                     <a href="#" class="seeMessages api_control semaphore_control {{ CommonLib::get_gateway() == 1 ? 'd-block' : 'd-none' }}" data-target=".chat" data-url="{{route('setting.semaphore_sender_name.index')}}">
                         <div class="users-list-body">
                             <div>
                                 <h5><i class="fas fa-phone  text-primary"></i> Sender Name</h5>
@@ -62,7 +62,7 @@
                         </div>
                     </a>
 
-                    @endif
+                    
                     <a href="#" class="seeMessages" data-target=".chat" data-url="{{route('setting.users.index')}}">
                         <div class="users-list-body">
                             <div>

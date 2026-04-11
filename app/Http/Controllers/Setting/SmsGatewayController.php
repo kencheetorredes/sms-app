@@ -37,7 +37,8 @@ class SmsGatewayController extends Controller
          return response()->json([
             'code'   => 207,
             'msg'    => 'SMS gateway has been saved',
-            'target' => 'list_table'
+            'target' => 'list_table',
+            'class_' => $validate['sms_gateway'] == 1 ? '.semaphore_control' : '.twillio_control'
         ]);
 
     }

@@ -142,6 +142,9 @@ $(function () {
                                 }); 
                             } else if(response.code == 207){
                                form.prepend(successDiv.replace('success-mg',response.msg ));
+                               $('.api_control').addClass('d-none');
+                               $(''+response.class_+'').removeClass('d-none');
+
                                kill_alert(); 
                             }
                             
