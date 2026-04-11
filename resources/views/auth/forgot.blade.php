@@ -23,6 +23,8 @@
 	<!-- Main CSS -->
     <link rel="stylesheet" href="{{url('admin/assets/css/style.css')}}">
 
+    <link rel="stylesheet" href="{{url('common/custom.css')}}">
+
 </head>
 
 <body class="login-form">
@@ -32,8 +34,9 @@
         <div class="container-fluid">
             <div class="login-wrapper">
                 <header class="logo-header">
-                    <a href="/" class="logo-brand">
-                        <img src="{{url('assets/img/icon-logo.png')}}" alt="Logo" class="img-fluid logo-dark">
+                     <a href="/" class="logo-brand">
+                        <img src="{{url('assets/img/logo-sms-small.png')}}" alt="Logo" class="img-fluid logo-dark">
+                        <h5>SMS Marketing Platform</h5>
                     </a>
                 </header>
                 <div class="login-inbox">

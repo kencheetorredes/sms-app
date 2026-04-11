@@ -31,3 +31,90 @@
     -webkit-transition: ease all 0.5s;
     -ms-transition: ease all 0.5s;
 }
+
+
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: #e6f0ff !important;
+}
+
+.login-form {
+    padding-left: 0;
+    background: #e6f0ff !important;
+}
+
+.btn-primary {
+    color: #fff;
+    background: #0050b9 !important;
+    border-color: #0050b9 !important;
+    border: 2px solid #0a5fcf !important;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 50px 0 0 #fff inset;
+    color: #1a73e8  !important;
+    background: #1a73e8 !important;
+}
+
+
+.login-wrapper .login-inbox .log-auth form .form-group .forget-pass a {
+    color: #0050b9 !important;
+}
+
+.login-form::before {
+    content: "";
+    background-image: none !important;
+    background-repeat: no-repeat, no-repeat;
+    position: absolute;
+    width: 100%;
+    height: 462px;
+    bottom: 0;
+    z-index: -1;
+    background-size: cover;
+}
+
+.login-wrapper .logo-header a.logo-brand h5 {
+    margin: 0;
+    color: #0050b9;
+    text-transform: capitalize;
+}
+
+.chat-menus ul li a.active i {
+    color: #043c87 !important;
+}
+
+.chat-menus ul li a.active {
+    background: #e6f0ff  !important;
+}
+
+.chat-menus ul li a:hover {
+    background: #e6f0ff;
+}
+
+.chat-menus ul li a:hover i {
+    color: #043c87;
+}
+
+.tooltip .tooltip-inner {
+    background-color: #043c86;
+}
+
+.bs-tooltip-auto[data-popper-placement^=right] .tooltip-arrow::before, .bs-tooltip-end .tooltip-arrow::before {
+    right: -1px;
+    border-width: calc(var(--bs-tooltip-arrow-width) * .5) var(--bs-tooltip-arrow-height) calc(var(--bs-tooltip-arrow-width) * .5) 0;
+    border-right-color: #043c86;
+}
+
+.sidebar .user-list li a:hover, .sidebar .user-list li .list-user-blk:hover {
+    background-color: #edf3fb !important;
+
+}
+
+.seeMessages.active {
+    background-color: #e6f0ff !important;
+
+}
+
+.chat .chat-body .messages .chats.chats-right .message-content {
+    background-color: #e5f0ff  !important;
+}
