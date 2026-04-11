@@ -74,6 +74,8 @@ $(function () {
      */
     $(document).on('click', '.cuBtn',function(e) {
 
+        
+
         var $this = $(this),
             form  = typeof $this.data('form')  === 'undefined' ? $this.closest('form') : $('#' + $this.data('form') + ''),
             action = form.attr('action'),

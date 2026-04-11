@@ -16,10 +16,10 @@ class CreateSmsGatewaysTable extends Migration
         Schema::create('sms_gateways', function (Blueprint $table) {
             $table->id();
             $table->integer('sms_gateway')->default(1);
-            $table->text('twilio_sid');
-            $table->text('twilio_token');
-            $table->text('semaphore_api_key');
-            $table->text('semaphore_sender');
+            $table->text('twilio_sid')->nullable();
+            $table->text('twilio_token')->nullable();
+            $table->text('semaphore_api_key')->nullable();
+            $table->text('semaphore_sender')->nullable();
             $table->timestamps();
         });
     }

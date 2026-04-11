@@ -3,11 +3,12 @@
     <div class="card shadow-sm border-0 rounded-4">
         <div class="card-body p-4">
 
+            <form action="{{ route('setting.gateway.process') }}" method="post" id="bktForm">
 
             <!-- 🔘 Gateway चयन -->
             <div class="mb-4">
                 <label class="form-label">Select SMS Gateway</label>
-                <select class="form-select" id="gatewaySelect">
+                <select class="form-select" id="gatewaySelect" name="sms_gateway">
                     <option value="1">Semaphore (PH)</option>
                     <option value="2">Twilio</option>
                 </select>
@@ -48,9 +49,10 @@
 
             </div>
 
+            </form>
             <!-- 💾 SAVE BUTTON -->
             <div class="text-end mt-4">
-                <button class="btn btn-primary px-4 rounded-3">
+                <button  data-form="bktForm"  class="btn btn-primary px-4 rounded-3 cuBtn">
                     Save Settings
                 </button>
             </div>
