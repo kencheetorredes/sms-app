@@ -8,13 +8,13 @@
             <div class="mb-4">
                 <label class="form-label">Select SMS Gateway</label>
                 <select class="form-select" id="gatewaySelect">
-                    <option value="twilio">Twilio</option>
-                    <option value="semaphore">Semaphore (PH)</option>
+                    <option value="1">Semaphore (PH)</option>
+                    <option value="2">Twilio</option>
                 </select>
             </div>
 
             <!-- 🔵 TWILIO SETTINGS -->
-            <div id="twilioFields">
+            <div id="twilioFields" style="display:none;">
 
                 <h6 class="fw-semibold mb-3">Twilio Configuration</h6>
 
@@ -28,15 +28,11 @@
                     <input type="text" class="form-control" name="twilio_token">
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">From Number</label>
-                    <input type="text" class="form-control" name="twilio_from">
-                </div>
 
             </div>
 
             <!-- 🟢 SEMAPHORE SETTINGS -->
-            <div id="semaphoreFields" style="display:none;">
+            <div id="semaphoreFields" >
 
                 <h6 class="fw-semibold mb-3">Semaphore Configuration</h6>
 

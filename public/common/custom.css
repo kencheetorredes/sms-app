@@ -118,3 +118,27 @@
 .chat .chat-body .messages .chats.chats-right .message-content {
     background-color: #e5f0ff  !important;
 }
+
+.chat .chat-footer form .form-buttons .btn.send-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff !important;
+    background-color: #0050b9 !important;
+    margin-left: 10px;
+}
+
+.chat .chat-footer form .form-buttons .btn.send-btn:hover i {
+    color: #e5f0ff;
+}
+
+.chat .chat-footer form .form-buttons .btn.send-btn:hover {
+    border-color: #0050b9;
+}
+
+.login-wrapper .login-inbox .bottom-text p a {
+    color: #0050ba !important;
+}
