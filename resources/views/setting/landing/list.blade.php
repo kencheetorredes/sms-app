@@ -33,7 +33,7 @@
                                 </div>  
                         </div>
                     </a>
-
+                    @if(CommonLib::get_gateway() == 2)
                      <a href="#" class="seeMessages" data-target=".chat" data-url="{{route('setting.country_code.index')}}">
                         <div class="users-list-body">
                             <div>
@@ -51,7 +51,7 @@
                             </div> 
                         </div>
                     </a>
-
+                    @endif
                     <a href="#" class="seeMessages" data-target=".chat" data-url="{{route('setting.users.index')}}">
                         <div class="users-list-body">
                             <div>
@@ -63,7 +63,7 @@
 
                     <a href="#" class="seeMessages" data-target=".chat" data-url="{{route('setting.logs.index')}}">
                         <div class="users-list-body">
-                            <div>
+                            <div> 
                                 <h5><i class="fas fa-exclamation-triangle  text-primary"></i> Error Logs</h5>
                                 <p class="text-muted">View sending logs</p>
                             </div> 

@@ -2,14 +2,21 @@
 
 namespace App\Helper\Bkt;
 
-use Auth;
+use App\Models\ErrorLogs;
 use App\Models\Logs;
 use App\Models\Messages;
-use App\Models\ErrorLogs;
-use App\Models\UserNumbers;
 use App\Models\SettingUserRoles;
+use App\Models\SmsGateways;
+use App\Models\UserNumbers;
+use Auth;
 use Twilio\Rest\Client;
+
 class CommonLib {
+
+    public static function get_gateway(){
+        $gateway = SmsGateways::where('id',1)->pluck('sms_gateway')->first();
+        return $gateway ? $gateway : 1;
+    }
 
     /**
      * Send Messages
