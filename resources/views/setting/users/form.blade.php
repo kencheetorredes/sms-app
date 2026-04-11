@@ -1,12 +1,16 @@
 @php
     
 $mobiles = [];
-
+$sendernames = [];
 if($details){
     foreach($details->mobiles as $mobile){
         $mobiles[] = $mobile->number->id;
     }
+    foreach($details->sender_names as $sender_name){
+        $sendernames[] = $sender_name->sender_name_id;
+    }
 }
+
 
 @endphp
 <div class="modal-header ">
@@ -26,7 +30,7 @@ if($details){
                     <label for="exampleInputEmail1">Email</label>
                     <input type="text" class="form-control" name="email" value="{{$details ? $details->email : ''}}" >
                 </div>
-
+                @if(CommonLib::get_gateway() == 2)
                 <div class="form-group">
                     <label for="exampleInputEmail1">Twillio No</label>
                     <select name="mobiles[]" id="" class="form-control select2_modals"  multiple="multiple">
@@ -35,6 +39,18 @@ if($details){
                         @endforeach
                     </select>
                 </div>
+                @else
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Semaphore Sender Names</label>
+                    <select name="sender_names[]" id="" class="form-control select2_modals"  multiple="multiple">
+                        @foreach ($sender_names as $sender_name)
+                        <option @if(in_array($sender_name->id, $sendernames)) selected @endif value="{{$sender_name->id}}">{{$sender_name->sender_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                @endif
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Role</label>
@@ -45,6 +61,7 @@ if($details){
                         @endforeach
                     </select>
                 </div>
+                <input type="hidden" name="gateway" value="{{CommonLib::get_gateway()}}">
                 @if ($details)
                 <input type="hidden" name="id" value="{{$details->id}}">
                 <div class="form-group">

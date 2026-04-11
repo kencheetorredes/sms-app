@@ -40,7 +40,11 @@
                                     <tr>
                                         <th data-field="name">Name</th>
                                         <th data-field="email">Email</th>
+                                        @if(CommonLib::get_gateway() == 2)
                                         <th data-field="mobile">Twillio Numbers</th>
+                                        @else
+                                        <th data-field="sender_name">Sender Name</th>
+                                        @endif
                                         <th data-field="role_">Role</th>
                                         <th data-sortable="true" data-field="status_">Status</th>
                                     </tr>

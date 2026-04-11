@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Setting;
 
+use App\Http\Controllers\Controller;
+use App\Models\SemaphoreSenderNames;
+use App\Models\TwilioPhones;
+use App\Models\UserNumbers;
+use App\Models\Users;
+use App\Models\UserSenderNames;
 use Bkt;
 use Hash;
-use App\Models\Users;
-use App\Models\UserNumbers;
-use App\Models\TwilioPhones;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -39,7 +41,14 @@ class UserController extends Controller
         $results     = Users::lists($search, 1, $offset, $limit,$sort,$orderBy)->get();
 
         foreach( $results as  $result){
-            $mobiles = [];
+
+            $sender_name = [];
+            foreach($result->sender_names as $sender){
+                    $sender_name[] = $sender->sender_name->sender_name;
+            }
+
+            $result->sender_name = implode(',',$sender_name);
+            $mobiles = []; 
             foreach($result->mobiles as $mobile){
                 $mobiles[] = $mobile->number->mobile;
             }
@@ -63,7 +72,8 @@ class UserController extends Controller
     {
         return view('setting.users.form',[
             'details' =>  Users::where('id',$id)->first(),
-            'twillio_nos' => TwilioPhones::where('status',1)->get()
+            'twillio_nos' => TwilioPhones::where('status',1)->get(),
+            'sender_names' => SemaphoreSenderNames::where('status',1)->get()
        ]);
     }
 
@@ -78,21 +88,34 @@ class UserController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users,email',
-            'mobiles' => 'required|array|min:1',
+            'mobiles' => 'required_if:gateway,2|array|min:1',
+            'sender_names' => 'required_if:gateway,1|array|min:1',
             'role' => 'required'
         ]);
 
         unset($data['mobiles']);
+        unset($data['sender_names']);
 
         $password = rand('11111111','99999999');
         $data['password'] = Hash::make($password);
         $user = Users::create($data);
 
-        foreach($request->mobiles as $mobile){
-            UserNumbers::create([
-                'user_id' => $user->id,
-                'twillio_nunber' => $mobile
-            ]);
+        if(isset($request->mobiles)){
+            foreach($request->mobiles as $mobile){
+                UserNumbers::create([
+                    'user_id' => $user->id,
+                    'twillio_nunber' => $mobile
+                ]);
+            }
+        }
+
+         if(isset($request->sender_names)){
+            foreach($request->sender_names as $sender_name){
+                UserSenderNames::create([
+                    'user_id' => $user->id,
+                    'sender_name_id' => $sender_name
+                ]);
+            }
         }
 
         $info = [

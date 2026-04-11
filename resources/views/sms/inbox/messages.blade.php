@@ -12,7 +12,7 @@
                                 </ul>
                             </div>
                             <div class="mt-1">
-                                <h5>{{$user ? $user->name : $number }}<br>
+                                <h5 class="pt-1 pb-1">{{$user ? $user->name : $number }}<br>
                                 {{$user ? $user->mobile : '' }}<small></h5>
                             </div>
                         </div>

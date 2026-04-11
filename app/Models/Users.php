@@ -39,6 +39,10 @@ class Users extends Authenticatable
         return $this->hasMany(UserNumbers::class,'user_id','id');
     }
 
+    public function sender_names(){
+        return $this->hasMany(UserSenderNames::class,'user_id','id');
+    }
+
     public static function lists($key, $total = 0, $offset = 0, $limit = 10,$sort = '',$orderBy = ''){
 
         $sort_fiels  = [
